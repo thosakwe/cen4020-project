@@ -1,6 +1,6 @@
 # Task List
 * [x] Git repository
-* [ ] Project setup - Django
+* [x] Project setup - Django
   * [ ] - We are not separating the frontend and backend.
 * [ ] Database setup - design all the models/tables, and set them
 up in Django
