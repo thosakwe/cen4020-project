@@ -111,3 +111,4 @@ dmypy.json
 venv/
 .idea/
 *.sqlite3
+VideoGameReview
