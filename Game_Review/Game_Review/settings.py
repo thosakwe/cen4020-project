@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'Game.apps.GameConfig',
+    'game.apps.GameConfig',
     'review.apps.ReviewConfig',
     'users.apps.UsersConfig',
     'crispy_forms', # This is a third party django app for forms
@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'Game_Review.urls'
+ROOT_URLCONF = 'game_review.urls'
 
 TEMPLATES = [
     {
@@ -72,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Game_Review.wsgi.application'
+WSGI_APPLICATION = 'game_review.wsgi.application'
 
 
 # Database

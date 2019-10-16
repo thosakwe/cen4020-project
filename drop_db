@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+for dir in `ls Game_Review`; do
+  for file in `ls $dir`; do
+    base=`basename $file`
+    if [ "$base" != "init.py" ]; then
+      echo "$file"
+    fi
+  done
+done
