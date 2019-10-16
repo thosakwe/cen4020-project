@@ -3,16 +3,26 @@
 {% block content %}
 <h1>
     {% if profile.avatar_path %}
-    <img src="{{ profile.avatar_path }}" alt="{{ user.username }}" class="avatar">
+    <img src="{{ profile.avatar_path }}" alt="{{ the_user.username }}" class="avatar">
     {% endif %}
-    {{ user.username }}
+    {{ the_user.username }}
 </h1>
-<p>{{ profile.bio }}</p>
+{% if not profile.bio %}
+<p>
+    <i>{{ the_user.username }} has not yet added a bio.</i>
+</p>
+{% else %}
+<p>
+    <b>Bio:</b>
+    {{ profile.bio }}
+</p>
+{% endif %}
 {% for error in errors %}
 <div class="alert alert-danger" role="alert">
     {{ error }}
 </div>
 {% endfor %}
+{% if the_user.id == user.id %}
 <form enctype="multipart/form-data" method="POST">
     {% csrf_token %}
     <div class="form-group">
@@ -25,4 +35,5 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+{% endif %}
 {% endblock content %}
