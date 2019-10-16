@@ -13,3 +13,14 @@ class Review(models.Model):
 
     def __str__(self):
         return self.title
+
+class Rating(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    on_review = models.ForeignKey(Review, on_delete=models.CASCADE)
+    score = models.IntegerField()
+
+class Comment(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    on_review = models.ForeignKey(Review, on_delete=models.CASCADE)
+    content = models.TextField()
+    date_posted = models.DateTimeField(default=timezone.now)
