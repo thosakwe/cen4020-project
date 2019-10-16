@@ -5,6 +5,19 @@
   <h1>{{ game.title }}</h1>
   <img style="max-width: 20em;" src="{{ image_url }}" alt="{{ game.title }}">
   <p>
+    <br>
+    {% if not review_classes %}
+    <i>This game has no reviews yet.</i>
+    <br>
+    {% else %}
+    <div>
+      <b>Average Rating:</b>
+      {% for class_name in review_classes %}
+      <div class="{{ class_name}}"></div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <br>
     <b>Description:</b>
     <i>{{ game.description }}</i>
   </p>
@@ -12,7 +25,7 @@
   <h5>Leave a Review...</h5>
   <form action="">
     <div class="form-group">
-      <label for="starsInput">Stars (out of 5):</label>
+      <label for="starsInput">Stars (<span id="starCount">3</span> out of 5):</label>
       <div id="stars">
         <div class="fas fa-star"></div>
         <div class="fas fa-star"></div>
@@ -37,6 +50,7 @@
     $('#starsInput').on('input', function () {
       var val = parseInt($(this).val());
       var stars = $('#stars').children();
+      $('#starCount').text(val.toString());
       for (var i = 0; i < val; i++) {
         stars[i].className = "fas fa-star";
       }

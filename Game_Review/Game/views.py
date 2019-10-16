@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
+from review.models import Review
+from statistics import mean
 from .forms import NewGameForm
 from .models import Game, game_public_url
 import os
@@ -12,7 +14,18 @@ import os
 
 def get_by_id(request, id):
     game = Game.objects.get(pk=id)
-    return render(request, 'Game/game.html', {'game': game, 'image_url': game_public_url(game)})
+    reviews = Review.objects.filter(game_id=game.id)
+    if not reviews:
+        review_classes = []
+    else:
+        avg_review = mean([r.score for r in reviews])
+        review_classes = []
+        for i in range(0, avg_review):
+            review_classes.append("fas fa-star")
+        for i in range(avg_review, 5):
+            review_classes.append("far fa-star")
+    return render(request, 'Game/game.html', {'game': game, 'image_url': game_public_url(game),
+                                              'review_classes': review_classes})
 
 # TODO: Only allow admins to create games
 # TODO: *Should* only admins be allowed to create games?
