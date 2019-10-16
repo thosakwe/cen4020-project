@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'Game.apps.GameConfig',
     'review.apps.ReviewConfig',
     'users.apps.UsersConfig',
     'crispy_forms', # This is a third party django app for forms

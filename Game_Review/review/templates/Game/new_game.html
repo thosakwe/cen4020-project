@@ -3,7 +3,12 @@
 {% block content %}
 <div class="content-section">
     <h1>New Game</h1>
-    <form method="POST">
+    {% for error in errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endfor %}
+    <form enctype="multipart/form-data" method="POST">
         {% csrf_token %}
         <div class="form-group">
             <label for="fileInput">Game Cover Art:</label>

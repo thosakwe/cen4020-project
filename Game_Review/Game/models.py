@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.db import models
 
+def game_public_url(game):
+  return "/static/game_images/" + str(game.id) + ".jpg"
+
 class Game(models.Model):
   image_path = models.TextField() # The path to the cover image, ex. "/static/games/battlefront.jpg"
   title = models.TextField()
