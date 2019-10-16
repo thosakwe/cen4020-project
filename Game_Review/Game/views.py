@@ -25,7 +25,7 @@ def get_by_id(request, id):
         for i in range(avg_review, 5):
             review_classes.append("far fa-star")
     return render(request, 'Game/game.html', {'game': game, 'image_url': game_public_url(game),
-                                              'review_classes': review_classes})
+                                              'review_classes': review_classes, 'reviews': reviews})
 
 # TODO: Only allow admins to create games
 # TODO: *Should* only admins be allowed to create games?

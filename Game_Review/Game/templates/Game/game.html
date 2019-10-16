@@ -21,6 +21,11 @@
     <b>Description:</b>
     <i>{{ game.description }}</i>
   </p>
+  {% if reviews %}
+  <hr>
+  <h5>Reviews ({{ reviews | length }})</h5>
+  <!-- TODO: List all reviews, with user profile pics and stars -->
+  {% endif %}
   <hr>
   <h5>Leave a Review...</h5>
   <form action="">
