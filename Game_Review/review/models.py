@@ -13,8 +13,3 @@ class Review(models.Model):
 
     def __str__(self):
         return self.title
-
-class Avatar(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    path = models.TextField()
-    mime_type = models.TextField() # The type of file, i.e. image/jpeg

@@ -1,10 +1,28 @@
 {% extends "review/base2.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h1>
-        {% if user.avatar %}
-        <img src="{{ user.avatar }}" alt="{{ user.username }}" class="avatar">
-        {% endif %}
-        {{ user.username }}
-    </h1>
+<h1>
+    {% if profile.avatar_path %}
+    <img src="{{ profile.avatar_path }}" alt="{{ user.username }}" class="avatar">
+    {% endif %}
+    {{ user.username }}
+</h1>
+<p>{{ profile.bio }}</p>
+{% for error in errors %}
+<div class="alert alert-danger" role="alert">
+    {{ error }}
+</div>
+{% endfor %}
+<form enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="fileInput">Set a new profile picture:</label>
+        <input class="form-control-file" type="file" name="avatar" id="fileInput">
+    </div>
+    <div class="form-group">
+        <label for="bioInput">Your Bio:</label>
+        <textarea id="bioInput" class="form-control" placeholder="Write a bio..." name="bio">{{ profile.bio }}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 {% endblock content %}

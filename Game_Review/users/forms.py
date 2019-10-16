@@ -7,3 +7,7 @@ class UserRegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+
+class EditProfileForm(forms.Form):
+    avatar = forms.ImageField(required=False)
+    bio = forms.CharField(required=False)
