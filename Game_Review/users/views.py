@@ -64,7 +64,7 @@ def profile(request):
                                 file.write(chunk)
 
                 # Update the user's profile.
-                profile.avatar_path = "/static/avatars/" + \
+                profile.avatar = "/static/avatars/" + \
                     str(the_user.id) + ".jpg"
                 profile.bio = bio or profile.bio
                 profile.save()
