@@ -1,5 +1,10 @@
 {% extends "review/base2.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h1>{{ user.username }}</h1>
+    <h1>
+        {% if user.avatar %}
+        <img src="{{ user.avatar }}" alt="{{ user.username }}" class="avatar">
+        {% endif %}
+        {{ user.username }}
+    </h1>
 {% endblock content %}
