@@ -4,7 +4,7 @@
   <tbody>
   <tr style="height: 260px;">
   {% for game in games %}
-  {% if game.picname == "jp" %}
+  {% if forloop.counter0 != 0 and forloop.counter0|divisibleby:4 %}
     </tr>
   {% endif %}
     <td style="width: 30%; height: 260px;"><img alt="game_name" src="../../static/game_posters/{{game.name}}" width="184" height="255">

@@ -89,3 +89,8 @@ img.avatar {
   width: 1.5em;
   object-fit: cover;
 }
+.ex1 {
+  position:absolute; left:500px; top:30px;
+  float:right;
+  padding-left: 400px;
+}
