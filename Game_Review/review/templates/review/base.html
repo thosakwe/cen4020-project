@@ -2,16 +2,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
     <link rel="stylesheet" type="text/css" href="{% static 'review/main.css' %}">
-
     {% if title %}
         <title>Game Guru's Reviews - {{ title }}</title>
     {% else %}
@@ -55,81 +52,9 @@
                 </div>
             {% endfor %}
         {% endif %}
-
-              {% if user.is_authenticated %}
-
-
-
-
-                <table style="height: 422px; width: 102.439%; border-collapse: collapse;" height="519" border="10">
-                <tbody>
-                <tr style="height: 260px;">
-                <td style="width: 31.5573%; height: 260px;"><img alt="God of War" id="plahover0" data-atf="0" src="../../static/game_posters/shopping.jpeg" width="184" height="255"></td>
-                <td style="width: 25%; height: 260px;"><img data-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMAO5ua4zfPJtJJMIQ3JqgTNtV-Thdv60rZ7Jgl_HfLTWKDPNaiw" jsaction="load:str.tbn" class="rg_ic rg_i" alt="Image result for star wars game" onload="typeof google==='object'&amp;&amp;google.aft&amp;&amp;google.aft(this)" src="../../static/game_posters/images_002.jpeg"></td>
-                <td style="width: 1.09863%; height: 260px;"><img data-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4Mwvr14YXE5fMVMd3s5Y4WIL4yo2RGZzpO9DVCI6wXwVrAQKhhA" jsaction="load:str.tbn" class="rg_ic rg_i" alt="Image result for half life game" onload="typeof google==='object'&amp;&amp;google.aft&amp;&amp;google.aft(this)" src="../../static/game_posters/images_003.jpeg"></td>
-                <td style="width: 23.0889%; height: 260px;"><img src="../../static/game_posters/Fortnite_cover_artPC.jpg" alt="Image result for fortnite game cover" width="204" height="288"></td>
-                </tr>
-                <tr style="height: 28px;">
-                <td style="width: 31.5573%; height: 28px;">rate</td>
-                <td style="width: 25%; height: 28px;">rate</td>
-                <td style="width: 1.09863%; height: 28px;">rate</td>
-                <td style="width: 23.0889%; height: 28px;">rate</td>
-                </tr>
-                <tr style="height: 57px;">
-                <td style="width: 31.5573%; height: 57px;"><img src="../../static/game_posters/lara-croft.jpg" alt="Image result for famous games cover" width="185" height="231"></td>
-                <td style="width: 25%; height: 57px;"><img src="../../static/game_posters/images.jpeg" alt="Image result for famous games cover"></td>
-                <td style="width: 1.09863%; height: 57px;"><img src="../../static/game_posters/call_of_duty-_infinite_warfare.jpg" alt="Image result for call of duty games" width="191" height="270"></td>
-                <td style="width: 23.0889%; height: 57px;"><img src="../../static/game_posters/PLAYERUNKNOWNS.jpg" alt="Image result for playerunknown's battlegrounds" width="206" height="274"></td>
-                </tr>
-                <tr style="height: 28px;">
-                <td style="width: 31.5573%; height: 28px;">rate</td>
-                <td style="width: 25%; height: 28px;">rate</td>
-                <td style="width: 1.09863%; height: 28px;">rate</td>
-                <td style="width: 23.0889%; height: 28px;">rate</td>
-                </tr>
-                <tr style="height: 28px;">
-                <td style="width: 31.5573%; height: 28px;">
-                <p><img src="../../static/game_posters/81ndeeHufoL.jpg" alt="Image result for deus ex machina game" width="188" height="265"></p>
-                <p></p>
-                <p></p>
-                </td>
-                <td style="width: 25%; height: 28px;"><img src="../../static/game_posters/mortalkombat11base.jpg" alt="Image result for mortal kombat" width="209" height="295"></td>
-                <td style="width: 1.09863%; height: 28px;"><img src="../../static/game_posters/5bb1c508ae653a1a791a9ac2.jpeg" alt="Image result for monster hunter world" width="194" height="260"></td>
-                <td style="width: 23.0889%; height: 28px;"><img src="../../static/game_posters/81cl16HeITL.jpg" alt="Image result for Destiny" width="209" height="277"></td>
-                </tr>
-                <tr style="height: 21px;">
-                <td style="width: 31.5573%; height: 30px;">rate</td>
-                <td style="width: 25%; height: 30px;">rate</td>
-                <td style="width: 1.09863%; height: 30px;">rate</td>
-                <td style="width: 23.0889%;">rate</td>
-                </tr>
-                </tbody>
-                </table>
-              {% endif %}
-
-
-
-
           {% block content %}{% endblock %}
         </div>
-        {% if user.is_authenticated == 0 %}
-        <div class="col-md-4">
-          <div class="content-section">
-            <h3>Our Sidebar</h3>
-            <p class='text-muted'>You can put any information here you'd like.
-              <ul class="list-group">
-                <li class="list-group-item list-group-item-light">Latest Posts</li>
-                <li class="list-group-item list-group-item-light">Announcements</li>
-                <li class="list-group-item list-group-item-light">Calendars</li>
-                <li class="list-group-item list-group-item-light">etc</li>
-              </ul>
-            </p>
-          </div>
-        </div>
-         {% endif %}
-      </div>
     </main>
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
