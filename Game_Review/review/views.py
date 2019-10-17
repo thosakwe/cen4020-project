@@ -10,6 +10,3 @@ def home(request):
 
 def about(request):
     return render(request, 'review/about.html', {'title':'About'})
-
-def liya(request):
-    return render(request, 'review/liya.html', {'title':'Liya'})
