@@ -1,4 +1,4 @@
-{% extends "review/base2.html" %}
+{% extends "review/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="content-section">
@@ -24,6 +24,18 @@
   {% if reviews %}
   <hr>
   <h5>Reviews ({{ reviews | length }})</h5>
+      {% for review in reviews %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ review.author }}</a>
+              <small class="text-muted">{{ review.date_reviewed|date:"F d, Y" }}</small>
+            </div>
+            <h2><a class="article-title" href="{% url 'review-detail' review.id %}">{{ review.title }}</a></h2>
+            <p class="article-content">{{ review.content }}</p>
+          </div>
+        </article>
+      {% endfor %}
   <!-- TODO: List all reviews, with user profile pics and stars -->
   {% endif %}
   <hr>
@@ -46,6 +58,7 @@
     </div>
     <button class="btn btn-primary">Submit</button>
   </form>
+  <a class="ml-2" href="{% url 'review-create' game=game.id %}">Taj Style Review (WIP)</a>
 </div>
 {% endblock content %}
 

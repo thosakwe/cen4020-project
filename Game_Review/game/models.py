@@ -12,12 +12,8 @@ class Game(models.Model):
   image_path = models.TextField() # The path to the cover image, ex. "/static/games/battlefront.jpg"
   title = models.TextField()
   description = models.TextField()
+  cost = models.IntegerField(default=0)
   # TODO: Maybe we can add more fields here, i.e. "what company made this game?" "what genre is it?"
-class Games(models.Model):
-	"""docstring for games"""
-	name = models.CharField(max_length = 50)
-	cost = models.IntegerField(default=0)
-	picname = models.CharField(max_length = 50,default='nan')
 
 #class User(models.Model):
 #    firstname = models.CharField(max_length = 50)
