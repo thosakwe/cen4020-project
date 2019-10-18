@@ -10,9 +10,5 @@ def home(request):
         'Playthroughs': playthroughs.objects.all()
     }
     return render(request, 'Playthroughs/home.html', context)
-
 def about(request):
     return render(request, 'Playthroughs/about.html', {'title':'About'})
-
-def liya(request):
-    return render(request, 'Playthroughs/liya.html', {'title':'Liya'})

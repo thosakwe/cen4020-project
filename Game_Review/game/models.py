@@ -18,7 +18,7 @@ class Game(models.Model):
 	"""docstring for games"""
 	name = models.CharField(max_length = 50,default='ab')
 	title = models.TextField(max_length = 50,default='non')
-	image_path = models.TextField(max_length = 50,default='non')
+	image_path = models.TextField(max_length = 50,default='ab')
 
 #class User(models.Model):
 #    firstname = models.CharField(max_length = 50)
