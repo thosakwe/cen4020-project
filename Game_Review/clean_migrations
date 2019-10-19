@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+for file in `find . -depth 3 -name '*.py' | grep migrations`; do
+  BASENAME=`basename $file`
+  if [ "$BASENAME" != "__init__.py" ]; then
+    echo "Removing migration file $file"
+    rm $file
+  fi
+done
