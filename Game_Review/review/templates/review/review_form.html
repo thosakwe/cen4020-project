@@ -1,0 +1,29 @@
+{% extends "review/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Create Review </legend>
+                {{ form | crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Submit</button>
+            </div>
+            <h5>Leave a Review...</h5>
+            <div class="form-group">
+              <label for="starsInput">Stars (<span id="starCount">3</span> out of 5):</label>
+              <div id="stars">
+                <div class="fas fa-star"></div>
+                <div class="fas fa-star"></div>
+                <div class="fas fa-star"></div>
+                <div class="far fa-star"></div>
+                <div class="far fa-star"></div>
+              </div>
+              <input id="starsInput" name="stars" class="form-control" step="1" min="1" max="5" value="3" type="range">
+            </div>
+        </form>
+    </div>
+
+{% endblock content %}

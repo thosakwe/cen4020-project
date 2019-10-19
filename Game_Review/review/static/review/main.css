@@ -90,7 +90,7 @@ img.avatar {
   object-fit: cover;
 }
 .ex1 {
-  position:absolute; left:500px; top:30px;
+  position:absolute; left:500px; top:10%;
   float:right;
-  padding-left: 400px;
+  margin-left: 400px;
 }
