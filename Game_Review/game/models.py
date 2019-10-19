@@ -9,8 +9,8 @@ def game_public_url(game):
   return "/static/game_images/" + str(game.id) + ".jpg"
 
 class Game(models.Model):
-  image_path = models.TextField() # The path to the cover image, ex. "/static/games/battlefront.jpg"
-  title = models.TextField()
+  image_path = models.TextField(max_length = 50,default='ab') # The path to the cover image, ex. "/static/games/battlefront.jpg"
+  title = models.TextField(max_length = 50,default='non')
   description = models.TextField()
   cost = models.IntegerField(default=0)
   # TODO: Maybe we can add more fields here, i.e. "what company made this game?" "what genre is it?"
