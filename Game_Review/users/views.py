@@ -54,18 +54,19 @@ def profile(request):
                         errors.extend(
                             ["Profile pictures must be jPEG images."])
                     else:
-                        file_path = "review/static/avatars/" + \
-                            str(the_user.id) + ".jpg"
+                        # dirname = os.path.dirname(os.path.abspath(__file__))
+                        dirname = os.path.dirname(__file__)
+                        review_path = os.path.join(dirname, "..", "review")
+                        avatars_path = os.path.join(review_path, "static", "avatars")
+                        file_path = os.path.join(avatars_path, str(the_user.id) + ".jpg")
                         avatar_dir = os.path.dirname(file_path)
                         if not os.path.exists(avatar_dir):
                             os.makedirs(avatar_dir)
                         with open(file_path, "wb") as file:
                             for chunk in avatar.chunks():
                                 file.write(chunk)
-
-                # Update the user's profile.
-                profile.avatar = "/static/avatars/" + \
-                    str(the_user.id) + ".jpg"
+                        # Update the user's profile.
+                        profile.avatar = "/static/avatars/" + str(the_user.id) + ".jpg"
                 profile.bio = bio or profile.bio
                 profile.save()
             else:

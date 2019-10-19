@@ -4,11 +4,16 @@ from game.models import Game
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Review
+import re
 
 # Create your views here.
 def home(request):
     lst =[1,2,3,4]
-    context = {'games': Game.objects.all(),'list':lst}
+    games = Game.objects.all()
+    for game in games:
+        path = game.image_path.url
+        game.image_path = re.sub(r'^review', '', path)
+    context = {'games': games,'list':lst}
     return render(request, 'review/home.html', context)
 
 def about(request):

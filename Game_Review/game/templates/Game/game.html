@@ -3,7 +3,7 @@
 {% block content %}
 <div class="content-section">
   <h1>{{ game.title }}</h1>
-  <img style="max-width: 20em;" src="{{ image_url }}" alt="{{ game.title }}">
+  <img style="max-height: 20em;" src="{{ game.image_path }}" alt="{{ game.title }}">
   <p>
     <br>
     {% if not review_classes %}

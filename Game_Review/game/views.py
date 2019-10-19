@@ -8,6 +8,7 @@ from statistics import mean
 from .forms import NewGameForm
 from .models import Game, game_public_url
 import os
+import re
 
 # Create your views here.
 
@@ -24,6 +25,7 @@ def get_by_id(request, id):
             review_classes.append("fas fa-star")
         for i in range(avg_review, 5):
             review_classes.append("far fa-star")
+    game.image_path = re.sub(r'^review', '', game.image_path.url)
     return render(request, 'Game/game.html', {'game': game, 'image_url': game_public_url(game),
                                               'review_classes': review_classes, 'reviews': reviews})
 
@@ -51,7 +53,13 @@ def new(request):
                 game.description = description
                 game.save()
                 # Save the cover image.
-                image_file_path = "review/" + game_public_url(game)
+                # This file is game/views.py, we need to save to
+                # review/game_images/...
+                # dirname = os.path.dirname(os.path.abspath(__file__))
+                dirname = os.path.dirname(__file__)
+                review_path = os.path.join(dirname, "..", "review")
+                game_images_path = os.path.join(review_path, "static", "game_images")
+                image_file_path = os.path.join(game_images_path, str(game.id) + ".jpg")
                 image_dir = os.path.dirname(image_file_path)
                 if not os.path.exists(image_dir):
                     os.makedirs(image_dir)
