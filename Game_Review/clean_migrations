@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+find . -type d -name '__pycache__' -delete
+find . -type f -name '*.pyc' -delete
 for file in `find . -depth 3 -name '*.py' | grep migrations`; do
   BASENAME=`basename $file`
   if [ "$BASENAME" != "__init__.py" ]; then
