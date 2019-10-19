@@ -14,10 +14,11 @@ def home(request):
 def about(request):
     return render(request, 'review/about.html', {'title':'About'})
 
-def review(request):
-    return render(request, 'review/review.html', context)
-
 class ReviewListView(ListView):
+    """
+    This view has not been implemented yet, but reviews get listed
+    on the game page anyway
+    """
     model = Review
     template_name = "review/review.html"
     context_object_name = 'review'

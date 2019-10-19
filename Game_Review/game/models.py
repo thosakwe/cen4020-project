@@ -14,9 +14,3 @@ class Game(models.Model):
   description = models.TextField()
   cost = models.IntegerField(default=0)
   # TODO: Maybe we can add more fields here, i.e. "what company made this game?" "what genre is it?"
-
-#class User(models.Model):
-#    firstname = models.CharField(max_length = 50)
-#    lastname = models.Charfield(max_length = 50)
-#    email = models.CharField(max_length = 200)
-#    password = models.CharField(max_length = 200)
