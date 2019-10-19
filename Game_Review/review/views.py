@@ -4,7 +4,7 @@ from game.models import Game
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Review
-from django.shortcuts import get_object_or_404
+
 # Create your views here.
 def home(request):
     lst =[1,2,3,4]
