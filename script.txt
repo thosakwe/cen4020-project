@@ -1,3 +1,10 @@
+Game Gurus is a crowd-source video game review. Content is user-generated,
+and logged-in users can view a game's main page, and leave a review, with a rating
+and free text description of their rating.
+
+Each game has a cover image, and user profiles can have both a profile image, and brief
+biographical information.
+
 To enter the application, head to the home page.
 
 The home page has a listing of all the games currently in the database.
@@ -12,3 +19,6 @@ or uploading a profile picture.
 
 You can also create a review for a given game, as long as it exists in the database.
 
+By the next iteration, we plan to have comments for reviews, RECAPTCHA, and spam protection,
+as well as the option of attaching YouTube links to reviews, so that users can show playthroughs
+of games.
