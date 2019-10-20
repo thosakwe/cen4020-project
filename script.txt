@@ -1,0 +1,14 @@
+To enter the application, head to the home page.
+
+The home page has a listing of all the games currently in the database.
+
+Before you can create reviews or other content, you must first sign up
+for an account..
+
+Once you've signed up, you can login.
+
+After logging in, you can edit your profile, which can involve setting a bio,
+or uploading a profile picture.
+
+You can also create a review for a given game, as long as it exists in the database.
+
