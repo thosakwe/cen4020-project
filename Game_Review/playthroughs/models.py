@@ -4,9 +4,13 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 # Create your models here.
 class playthroughs(models.Model):
-    gameName = models.CharField(max_length=100)
-    playthroughTitle = models.CharField(max_length=100)
-    playDescription = models.TextField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    game_id = models.IntegerField()
+    title = models.CharField(max_length=100)
+    game_reviewed = models.CharField(max_length=100)
+    content = models.TextField()
+    date_posted = models.DateTimeField(default=timezone.now)
+    video_url = models.CharField(max_length=100)
 
 class Playthrough_Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
