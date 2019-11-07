@@ -83,4 +83,4 @@ def display_video(request):
                'form': form
                }
 
-    return render(request, 'Blog/videos.html', context)
+    return render(request, 'upload/videos.html', context)
