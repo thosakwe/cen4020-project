@@ -24,4 +24,4 @@ class Playthrough_Comment(models.Model):
 
 
     def __str__(self):
-        return self.gameName
+        return self.gameName + "\n" + self.name + "\n" + self.videofile
