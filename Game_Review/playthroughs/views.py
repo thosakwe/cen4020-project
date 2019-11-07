@@ -3,6 +3,9 @@ from .models import playthroughs
 from game.models import Game
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import render
+from .models import Video
+from .forms import VideoForm
 
 
 # Create your views here.
