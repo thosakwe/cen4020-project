@@ -18,6 +18,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url('', include('social.apps.django_app.urls', namespace='social')),
-    url(r'^Blog/', include('Blog.urls')),
+    url(r'^upload/', include('upload.urls')),
     url(r'^growth/', include('growth.urls')),
 ]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
