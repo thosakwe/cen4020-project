@@ -11,6 +11,10 @@ class playthroughs(models.Model):
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     video_url = models.CharField(max_length=100)
+    
+class Video(models.Model):
+    name = models.CharField(max_length=500)
+    videofile = models.FileField(upload_to='videos/', null=True, verbose_name="")
 
 class Playthrough_Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
