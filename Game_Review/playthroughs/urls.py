@@ -15,7 +15,6 @@ urlpatterns = [
     path('playthroughs/<int:pk>/update/', PlaythroughUpdateView.as_view(), name="playthrough-update"),
     path('playthroughs/<int:pk>/delete/', PlaythroughDeleteView.as_view(), name="playthrough-delete"),
     path('about/', views.about, name='playthrough-about'),
-    url(r'^admin/', admin.site.urls),
     #url(r'^accounts/', include('registration.backends.default.urls')),
     #url('', include('social.apps.django_app.urls', namespace='social')),
     #url(r'^upload/', include('upload.urls')),
