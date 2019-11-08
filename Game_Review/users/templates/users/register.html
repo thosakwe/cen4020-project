@@ -1,6 +1,7 @@
 {% extends "review/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
@@ -17,5 +18,13 @@
                 </small>
             </div>
         </form>
+
+
+     <form method="post" onsubmit="return submitUserForm();">
+    <div class="g-recaptcha" data-sitekey="6Lc6pcEUAAAAAOSaau6qW58raVHC8KW--cEpYuj2" data-callback="verifyCaptcha"></div>
+    <div id="g-recaptcha-error"></div>
+    <input type="submit" name="submit" value="Submit" />
+</form>
+
     </div>
 {% endblock content %}
