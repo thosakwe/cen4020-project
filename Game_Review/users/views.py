@@ -6,21 +6,18 @@ from django.contrib.auth.models import User
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
 from .models import Profile
-from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 import os
 
 # Create your views here.
 
 
 def register(request):
-    captcha = ReCaptchaField()
     if request.method == 'POST':
         # if we get a POST request, create a user creation
         # form
         form = UserRegistrationForm(request.POST)
         
         if form.is_valid():
-            ReCaptchaField()
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(
@@ -29,7 +26,7 @@ def register(request):
     else:
         # else, create an empty form
         form = UserRegistrationForm()
-    return render(request, 'users/register.html', {'form': form, 'recaptcha3': captcha, })
+    return render(request, 'users/register.html', {'form': form,})
 
 
 @login_required

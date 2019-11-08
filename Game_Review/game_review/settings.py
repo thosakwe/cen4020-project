@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'playthroughs',
     'search',
-    'snowpenguin.django.recaptcha3',
 ]
 
 MIDDLEWARE = [
