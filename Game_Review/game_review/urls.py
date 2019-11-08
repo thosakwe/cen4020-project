@@ -26,4 +26,5 @@ urlpatterns = [
     path('', include('users.urls')),
     path('', include('review.urls')),
     path('', include('playthroughs.urls')),
+    path('', include('search.urls')),
 ]

@@ -8,3 +8,4 @@ from .models import Video
 # -*- coding: utf-8 -*-
 admin.site.register(playthroughs)
 admin.site.register(Video)
+

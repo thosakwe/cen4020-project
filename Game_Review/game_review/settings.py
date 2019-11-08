@@ -30,7 +30,6 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'game.apps.GameConfig',
     'review.apps.ReviewConfig',
@@ -43,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'playthroughs',
+    'search',
 ]
 
 MIDDLEWARE = [
@@ -115,6 +115,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+RECAPTCHA_PRIVATE_KEY = '6Ld7nMEUAAAAACE4GOWfS03kTl0fGwMvT9_oBPSz'
+RECAPTCHA_PUBLIC_KEY = '6Ld7nMEUAAAAAN6qauxtmHu7gOKJFZpDT2UjE3rk'
+RECAPTCHA_DEFAULT_ACTION = 'generic'
+RECAPTCHA_SCORE_THRESHOLD = 0.5
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/

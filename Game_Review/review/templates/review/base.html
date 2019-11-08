@@ -14,22 +14,29 @@
     {% else %}
         <title>Game Guru's Reviews</title>
     {% endif %}
+
 </head>
 <body>
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
-          <a class="navbar-brand mr-4" href="{% url 'review-home' %}">Game Guru's Reviews</a>
+          <img alt="some text" height="60" width="60" src="../../static/game_posters/logo.png"style="margin-right:5px;">
+        <a class="navbar-brand mr-4" href="{% url 'review-home' %}">Game Reviews
+            <div id="para1"></div> </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="{% url 'review-home' %}">Home</a>
-              <a class="nav-item nav-link" href="{% url 'review-about' %}">About</a>
+              <a class="nav-item nav-link" href="{% url 'review-home' %}"style="padding-left: 50px;"
+              >Reviews</a>
+              <a class="nav-item nav-link" href="{% url 'review-about' %}"style="padding-left: 50px;"
+              >News</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
+                
+                <a class="nav-item nav-link" href="{% url 'search' %}"><img src="../../static/game_posters/search.png" height="34" width="34"></a>
               {% if user.is_authenticated %}
                 <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
                 <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
@@ -70,6 +77,19 @@
     </main>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script>
+    document.getElementById("para1").innerHTML = formatAMPM();
+
+function formatAMPM() {
+var d = new Date(),
+    minutes = d.getMinutes().toString().length == 1 ? '0'+d.getMinutes() : d.getMinutes(),
+    hours = d.getHours().toString().length == 1 ? '0'+d.getHours() : d.getHours(),
+    ampm = d.getHours() >= 12 ? 'pm' : 'am',
+    months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+return days[d.getDay()]+' '+months[d.getMonth()]+' '+d.getDate()+' '+d.getFullYear();
+}
+</script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

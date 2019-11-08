@@ -1,13 +1,26 @@
 {% extends "review/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+<script>
+function submitUserForm() {
+    var response = grecaptcha.getResponse();
+    if(response.length == 0) {
+        document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">This field is required.</span>';
+        return false;
+    }
+    return true;
+}
+</script>
     <div class="content-section">
-        <form method="POST">
+        <form method="POST" onsubmit="return submitUserForm();">
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Join the Guru-Nation </legend>
                 {{ form | crispy }}
             </fieldset>
+            <div class="g-recaptcha" data-sitekey="6Lc6pcEUAAAAAOSaau6qW58raVHC8KW--cEpYuj2" data-callback="verifyCaptcha"></div>
+            <div id="g-recaptcha-error"></div>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Sign Up</button>
             </div>

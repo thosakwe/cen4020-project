@@ -15,7 +15,7 @@ from .models import playthroughs
 # Create your views here.
 def home(request):
     context = {
-        'Playthroughs': playthroughs.objects.all()
+        'Playthroughs': Playthroughs.objects.all()
     }
     return render(request, 'Playthroughs/home.html', context)
 def about(request):
