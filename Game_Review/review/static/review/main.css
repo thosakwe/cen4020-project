@@ -90,7 +90,12 @@ img.avatar {
   object-fit: cover;
 }
 .ex1 {
-  position:absolute; left:500px; top:10%;
-  float:right;
+  position: absolute;
+  left: 500px;
+  float: right;
   margin-left: 400px;
+} 
+div#para1 {
+  font-size: 0.7rem;
+  font-style: italic;
 }

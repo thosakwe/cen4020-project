@@ -1,15 +1,20 @@
 {% extends "review/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+
+<script src='https://www.google.com/recaptcha/api.js'></script>
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
+
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Log In </legend>
+
                 {{ form | crispy }}
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Login</button>
+                 {{   grecaptcha.ready }}
             </div>
             <div class="border-top pt-3">
                 <small class="text-muted">
@@ -17,5 +22,14 @@
                 </small>
             </div>
         </form>
+
+     <form method="post" onsubmit="return submitUserForm();">
+    <div class="g-recaptcha" data-sitekey="6Lc6pcEUAAAAAOSaau6qW58raVHC8KW--cEpYuj2" data-callback="verifyCaptcha"></div>
+    <div id="g-recaptcha-error"></div>
+    <input type="submit" name="submit" value="Submit" />
+</form>
+
+
+
     </div>
 {% endblock content %}
