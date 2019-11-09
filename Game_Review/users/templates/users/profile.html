@@ -3,8 +3,8 @@
 {% block content %}
 <div class="content-section">
     <h1>
-        {% if profile.avatar %}
-        <img src="{{ profile.avatar }}" alt="{{ the_user.username }}" class="avatar">
+        {% if user.profile.avatar %}
+        <img src="{{ user.profile.avatar }}" alt="{{ the_user.username }}" class="avatar">
         {% endif %}
         {{ the_user.username }}
     </h1>
@@ -15,7 +15,7 @@
     {% else %}
     <p>
         <b>Bio:</b>
-        {{ profile.bio }}
+        {{ user.profile.bio }}
     </p>
     {% endif %}
     {% for error in errors %}

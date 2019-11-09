@@ -4,6 +4,7 @@ from game.models import Game
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Review
+from users.models import Profile
 import re
 
 # Create your views here.
@@ -32,6 +33,12 @@ class ReviewListView(ListView):
 class ReviewDetailView(DetailView):
     model = Review
     template_name = "review/review_detail.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['profile'] = Profile.objects.get(user=self.request.user)
+        return context
+
+
 
 class ReviewCreateView(LoginRequiredMixin, CreateView):
     model = Review
@@ -40,7 +47,7 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         game = Game.objects.get(pk=self.kwargs['game'])
         form.instance.author = self.request.user
-        form.instance.game_id = game.id
+        form.instance.game = game
         form.instance.score = 3
         return super().form_valid(form)
 
