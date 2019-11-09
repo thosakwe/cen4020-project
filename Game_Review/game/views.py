@@ -7,6 +7,7 @@ from review.models import Review
 from statistics import mean
 from .forms import NewGameForm
 from .models import Game, game_public_url
+from users.models import Profile
 import os
 import re
 
@@ -15,7 +16,7 @@ import re
 
 def get_by_id(request, id):
     game = Game.objects.get(pk=id)
-    reviews = Review.objects.filter(game_id=game.id)
+    reviews = Review.objects.filter(game=game)
     if not reviews:
         review_classes = []
     else:
@@ -26,8 +27,14 @@ def get_by_id(request, id):
         for i in range(avg_review, 5):
             review_classes.append("far fa-star")
     game.image_path = re.sub(r'^review', '', game.image_path.url)
-    return render(request, 'Game/game.html', {'game': game, 'image_url': game_public_url(game),
-                                              'review_classes': review_classes, 'reviews': reviews})
+    context = {
+        'game': game, 
+        'image_url': game_public_url(game),
+        'review_classes': review_classes, 
+        'reviews': reviews,
+        'profile': Profile.objects.get(user=request.user),
+    }
+    return render(request, 'Game/game.html', context)
 
 # TODO: Only allow admins to create games
 # TODO: *Should* only admins be allowed to create games?

@@ -2,17 +2,19 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
+from game.models import Game
 
 # Create your models here.
 class Review(models.Model):
     # On delete tells django to remove all a users post, if said user gets deleted
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    game_id = models.IntegerField()
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    game_reviewed = models.CharField(max_length=100)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     score = models.IntegerField()
+    likes = models.IntegerField(default=0)
+    dislikes = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title

@@ -30,7 +30,7 @@ def register(request):
 
 
 @login_required
-def profile(request):
+def profile(request,id):
     # Fetch the user's profile.
     errors = []
     user_id = int(request.GET.get('user_id', request.user.id))

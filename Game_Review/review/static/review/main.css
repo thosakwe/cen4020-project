@@ -99,3 +99,6 @@ div#para1 {
   font-size: 0.7rem;
   font-style: italic;
 }
+
+.media .media-object { max-width: 120px; }
+.media-body { position: relative; }
