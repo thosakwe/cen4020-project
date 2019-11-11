@@ -1,30 +1,19 @@
 {% extends "review/base.html" %}
 {% block content %}
-<table style="height: 422px; width: 100%; border-collapse: collapse;" height="519" border="1">
+<table style="height: 82px; width: 20%; border-collapse: collapse;" height="519" border="1">
   <tbody>
   <tr style="height: 260px;">
   {% for game in games %}
   {% if forloop.counter0 != 0 and forloop.counter0|divisibleby:4 %}
   </tr>
   {% endif %}
-  console.log(game.image_path);
-    <td style="width: 30%; height: 260px;">
+    <td style="width: 30%; height: 200px;">
+      <div class="figure">
       <a href="{% url 'game' game.pk %}">
-        <img alt="game_name" src="{{game.image_path}}" width="184" height="255">
-      </a>
-      <link rel="stylesheet" href="stylesheet.css">
-       <span class="starRating">
-        <input id="rating5" type="radio" name="rating" value="5">
-        <label for="rating5">5</label>
-        <input id="rating4" type="radio" name="rating" value="4">
-        <label for="rating4">4</label>
-        <input id="rating3" type="radio" name="rating" value="3" checked>
-        <label for="rating3">3</label>
-        <input id="rating2" type="radio" name="rating" value="2">
-        <label for="rating2">2</label>
-        <input id="rating1" type="radio" name="rating" value="1">
-        <label for="rating1">1</label>
-      </span>
+        <img alt="game_name" src="{{ game.image_path }}" width="184" height="255">
+      <figcaption> Rate {{ game.title }}  </figcaption>
+    </a> 
+    </div>
     </td>
   {% endfor %}
     {% for review in reviews %}

@@ -11,12 +11,12 @@
       <ul>
           <li>
               <div class=figure>
-
-                    <p> <img alt='picName' src= "{{ game.image_path.url }}" width="184" height="255" > </p>
-        
-                    <p> 
-                      {{ game.title }} -------  {{ game.description }}
-                    </p>
+                {% if found %}
+                  <a href="{% url 'game' game.pk %}">
+                      <img alt="game_name" src="{{game.image_path.url}}" width="184" height="255">
+                {% endif %}
+                      <figcaption> {{ game.title }} </figcaption>
+                  </a>
               </div>
           </li>
       </ul>

@@ -21,6 +21,7 @@ def get_by_id(request, id):
         review_classes = []
     else:
         avg_review = mean([r.score for r in reviews])
+        avg_review = int(avg_review)
         review_classes = []
         for i in range(0, avg_review):
             review_classes.append("fas fa-star")
