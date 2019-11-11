@@ -4,7 +4,7 @@ from game.models import Game
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render
-from .models import Video
+#from .models import Video
 from .forms import VideoForm
 
 
@@ -15,7 +15,7 @@ from .models import playthroughs
 # Create your views here.
 def home(request):
     context = {
-        'Playthroughs': Playthroughs.objects.all()
+        'Playthroughs': playthroughs.objects.all()
     }
     return render(request, 'Playthroughs/home.html', context)
 def about(request):
@@ -71,7 +71,7 @@ class PlaythroughDeleteView(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
             return False
         
 def display_video(request):
-    lastvideo = Video.objects.last()
+    lastvideo = playthroughs.objects.last()
 
     videofile = lastvideo.videofile
 
