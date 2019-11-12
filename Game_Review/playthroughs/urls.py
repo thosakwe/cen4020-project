@@ -14,7 +14,7 @@ urlpatterns = [
     re_path('^playthroughs/new/(?P<game>[0-9]+)/$', PlaythroughCreateView.as_view(), name="playthrough-create"),
     path('playthroughs/<int:pk>/update/', PlaythroughUpdateView.as_view(), name="playthrough-update"),
     path('playthroughs/<int:pk>/delete/', PlaythroughDeleteView.as_view(), name="playthrough-delete"),
-    path('about/', views.about, name='playthrough-about'),
+    path('nes/', views.news, name='playthrough-news'),
     #url(r'^accounts/', include('registration.backends.default.urls')),
     #url('', include('social.apps.django_app.urls', namespace='social')),
     #url(r'^upload/', include('upload.urls')),

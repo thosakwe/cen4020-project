@@ -18,8 +18,8 @@ def home(request):
         'Playthroughs': playthroughs.objects.all()
     }
     return render(request, 'Playthroughs/home.html', context)
-def about(request):
-    return render(request, 'Playthroughs/about.html', {'title':'About'})
+def news(request):
+    return render(request, 'Playthroughs/news.html', {'title':'News'})
 
 class PlaythroughListView(ListView):
 
