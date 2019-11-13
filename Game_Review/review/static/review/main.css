@@ -100,25 +100,10 @@ div#para1 {
   font-style: italic;
 }
 
-figure {
-  border: thin #c0c0c0 solid;
-  display: flex;
-  flex-flow: column;
-  padding: 5px;
-  max-width: 220px;
-  margin: auto;
+.media .media-object { 
+  height: 5em;
+  width: 5em;
+  object-fit: cover;
+  border-radius: 50%; 
 }
-
-img {
-  max-width: 220px;
-  max-height: 220px;
-}
-figcaption {
-  background-color: #222;
-  color: #fff;
-  font: italic smaller sans-serif;
-  padding: 3px;
-  text-align: center;
-}
-.media .media-object { max-width: 120px; }
 .media-body { position: relative; }
