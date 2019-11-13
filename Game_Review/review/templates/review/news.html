@@ -1,0 +1,17 @@
+{% extends "review/base.html" %}
+{% block content %}
+<h3> This week trending games </h3>
+  {% for game in games %}
+      <ul>
+          <li>
+              <div class=figure>
+                  <a href="{% url 'game' game.pk %}">
+					  <img alt="game_name" src="{{game.image_path.url}}
+					  " width="184" height="255">
+                      <figcaption> {{ game.title }} </figcaption>
+                  </a>
+              </div>
+          </li>
+      </ul>
+  {% endfor %}
+{% endblock content %}

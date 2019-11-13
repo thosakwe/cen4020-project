@@ -17,8 +17,9 @@ def home(request):
     context = {'games': games,'list':lst}
     return render(request, 'review/home.html', context)
 
-def about(request):
-    return render(request, 'review/about.html', {'title':'About'})
+def news(request):
+    games = Game.objects.all()
+    return render(request, 'review/news.html', {'games':games})
 
 class ReviewListView(ListView):
     """
@@ -37,7 +38,6 @@ class ReviewDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['profile'] = Profile.objects.get(user=self.request.user)
         return context
-
 
 
 class ReviewCreateView(LoginRequiredMixin, CreateView):

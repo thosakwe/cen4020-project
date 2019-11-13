@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="star.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="rater.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css"  href="star.css">
+
+
+    <script>
+
+ $(document).ready(function(){
+            var options = {
+                max_value: 6,
+                step_size: 0.5,
+                selected_symbol_type: 'hearts',
+                url: 'http://localhost/test.php',
+                initial_value: 3,
+                update_input_field_name: $("#input2"),
+            }
+            $(".rate").rate();
+
+            $(".rate").rate("setFace", 5, '😊');
+            $(".rate").rate("setFace", 1, '😒');
+
+
+            var options3 = {
+                selected_symbol_type: 'utf8_emoticons',
+                max_value: 4,
+                step_size: 1,
+                convert_to_utf8: true,
+                only_select_one_symbol: true,
+            };
+
+
+            setTimeout(function(){
+                $("#rate4").rate({
+                    selected_symbol_type: 'fontawesome_beer',
+                    max_value: 5,
+                    step_size: 0.25,
+                });
+
+
+            }, 2000);
+
+
+
+            $("#rate7").rate({
+                selected_symbol_type: 'image2',
+                max_value: 5,
+                step_size: 1,
+                update_input_field_name: $("#input1"),
+                only_select_one_symbol: true,
+                symbols:{
+                    image2: {
+                        base: ['<div style="background-image: url(\'./images/emoji1.png\');" class="im2">&nbsp;</div>',
+                               '<div style="background-image: url(\'./images/emoji2.png\');" class="im2">&nbsp;</div>',
+                               '<div style="background-image: url(\'./images/emoji3.png\');" class="im2">&nbsp;</div>',
+                               '<div style="background-image: url(\'./images/emoji4.png\');" class="im2">&nbsp;</div>',
+                               '<div style="background-image: url(\'./images/emoji5.png\');" class="im2">&nbsp;</div>',],
+                        hover: ['<div style="background-image: url(\'./images/emoji1.png\');" class="im2">&nbsp;</div>',
+                               '<div style="background-image: url(\'./images/emoji2.png\');" class="im2">&nbsp;</div>',
+                               '<div style="background-image: url(\'./images/emoji3.png\');" class="im2">&nbsp;</div>',
+                               '<div style="background-image: url(\'./images/emoji4.png\');" class="im2">&nbsp;</div>',
+                               '<div style="background-image: url(\'./images/emoji5.png\');" class="im2">&nbsp;</div>',],
+                        selected: ['<div style="background-image: url(\'./images/emoji1.png\');" class="im2">&nbsp;</div>',
+                               '<div style="background-image: url(\'./images/emoji2.png\');" class="im2">&nbsp;</div>',
+                               '<div style="background-image: url(\'./images/emoji3.png\');" class="im2">&nbsp;</div>',
+                               '<div style="background-image: url(\'./images/emoji4.png\');" class="im2">&nbsp;</div>',
+                               '<div style="background-image: url(\'./images/emoji5.png\');" class="im2">&nbsp;</div>',],
+                    },
+                },
+            });
+        });
+
+}
+
+    </script>
+ 
+</head>
+<body>
+     <p>Mamush</p>
+    <div class="rate"></div>
+    <div class="rate"></div>
+</body>
+</html>
+
+

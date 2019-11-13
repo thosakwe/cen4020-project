@@ -1,0 +1,24 @@
+{% extends "review/base.html" %}
+{% block content %}
+
+<form method="POST" >
+    {% csrf_token %}
+    {{ searched }}
+    <button type="submit">Submit</button>
+</form>
+
+  {% for game in result %}
+      <ul>
+          <li>
+              <div class=figure>
+                {% if found %}
+                  <a href="{% url 'game' game.pk %}">
+                      <img alt="game_name" src="{{game.image_path.url}}" width="184" height="255">
+                {% endif %}
+                      <figcaption> {{ game.title }} </figcaption>
+                  </a>
+              </div>
+          </li>
+      </ul>
+  {% endfor %}
+{% endblock content %}

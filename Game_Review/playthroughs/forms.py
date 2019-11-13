@@ -1,8 +1,8 @@
 from django import forms
-from .models import Video
+from .models import playthroughs
 
 
 class VideoForm(forms.ModelForm):
     class Meta:
-        model = Video
+        model = playthroughs
         fields= ["name", "videofile"]

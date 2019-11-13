@@ -9,15 +9,18 @@ class playthroughs(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     game_id = models.IntegerField()
     title = models.CharField(max_length=100)
-    game_reviewed = models.CharField(max_length=100)
+    game_played = models.CharField(max_length=100)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
-
-
-class Video(models.Model):
     name = models.CharField(max_length=500)
     videofile = models.FileField(upload_to='videos/', null=True, verbose_name="")
     video_url = models.CharField(max_length=100)
+
+
+#class Video(models.Model):
+    #name = models.CharField(max_length=500)
+    #videofile = models.FileField(upload_to='videos/', null=True, verbose_name="")
+    #video_url = models.CharField(max_length=100)
 
 
 class Playthrough_Comment(models.Model):

@@ -1,0 +1,57 @@
+<style>
+        body
+        {
+            font-size: 35px;
+            font-family: sans-serif;
+        }
+        .rate-base-layer
+        {
+            color: #aaa;
+        }
+        .rate-hover-layer
+        {
+            color: orange;
+        }
+        .rate2
+        {
+            font-size: 35px;
+        }
+        .rate2 .rate-hover-layer
+        {
+            color: pink;
+        }
+        .rate2 .rate-select-layer
+        {
+            color: red;
+        }
+        .im
+        {
+            background-image: url('./images/heart.gif');
+            background-size: 32px 32px;
+            background-repeat: no-repeat;
+            width: 32px;
+            height: 32px;
+            display: inline-block;
+        }
+        .im2
+        {
+            background-image: url('./images/emoji5.png');
+            background-size: 64px 64px;
+            background-repeat: no-repeat;
+            width: 64px;
+            height: 64px;
+            display: inline-block;
+        }
+        #rate5 .rate-base-layer span, #rate7 .rate-base-layer span
+        {
+            opacity: 0.5;
+        }
+        hr
+        {
+            border: 1px solid #ccc;
+        }
+        p
+        {
+            font-size: 15px;
+        }
+    </style>
