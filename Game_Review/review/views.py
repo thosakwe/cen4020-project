@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Review
 from users.models import Profile
 import re
+import collections
 
 # Create your views here.
 def home(request):
@@ -19,7 +20,8 @@ def home(request):
 
 def news(request):
     games = Game.objects.all()
-    return render(request, 'review/news.html', {'games':games})
+    review = Review.objects.order_by('-score')
+    return render(request, 'review/news.html',{'games':games,'review':review})
 
 class ReviewListView(ListView):
     """
