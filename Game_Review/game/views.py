@@ -33,7 +33,6 @@ def get_by_id(request, id):
         'image_url': game_public_url(game),
         'review_classes': review_classes, 
         'reviews': reviews,
-        'profile': Profile.objects.get(user=request.user),
     }
     return render(request, 'Game/game.html', context)
 

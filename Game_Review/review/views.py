@@ -56,7 +56,6 @@ def review_detail(request, pk):
             'comments': comments,
             'new_comment': new_comment,
             'comment_form': form,
-            'profile': Profile.objects.get(user=request.user),
         }
     return render(request, template_name, context)
 
@@ -65,7 +64,6 @@ class ReviewDetailView(DetailView):
     template_name = "review/review_detail.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['profile'] = Profile.objects.get(user=self.request.user)
         return context
 
 
