@@ -34,7 +34,7 @@ class PlaythroughDetailView(DetailView):
 
 class PlaythroughCreateView(LoginRequiredMixin, CreateView):
     model = playthroughs
-    fields = ['title','content']
+    fields = ['title','content','name', 'videofile']
 
     def form_valid(self, form):
         game = Game.objects.get(pk=self.kwargs['game'])
@@ -45,7 +45,7 @@ class PlaythroughCreateView(LoginRequiredMixin, CreateView):
 
 class PlaythroughUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = playthroughs
-    fields = ['title', 'content']
+    fields = ['title', 'content', 'name', 'videofile']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -53,7 +53,7 @@ class PlaythroughUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView)
         return super().form_valid(form)
 
     def test_func(self):
-        review = self.get_object()
+        playthroughs = self.get_object()
         if self.request.user == playthroughs.author:
             return True
         else:
