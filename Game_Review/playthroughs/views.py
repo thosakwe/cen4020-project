@@ -53,7 +53,7 @@ class PlaythroughUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView)
         return super().form_valid(form)
 
     def test_func(self):
-        review = self.get_object()
+        playthroughs = self.get_object()
         if self.request.user == playthroughs.author:
             return True
         else:
