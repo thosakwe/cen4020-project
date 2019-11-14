@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
+from embed_video.fields import EmbedVideoField
 
 
 # Create your models here.
@@ -14,7 +15,8 @@ class playthroughs(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     name = models.CharField(max_length=500)
     videofile = models.FileField(upload_to='videos/', null=True, verbose_name="")
-    video_url = models.CharField(max_length=100)
+    #video = EmbedVideoField()
+
 
 
 #class Video(models.Model):
