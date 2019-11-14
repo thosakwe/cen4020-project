@@ -27,15 +27,13 @@
                 <small class="text-muted">{{ playthroughs.date_posted|date:"F d, Y" }}</small>
                 <p class="media-comment">
                   {{ playthroughs.content }}
-                </p>
-                <a class="btn btn-info btn-circle text-uppercase" href="#" id="like"> Like {{ playthroughs.likes }}</a>
-                <a class="btn btn-warning btn-circle text-uppercase"  href="#" id="dislike"> Dislike {{ playthroughs.dislikes }}</a>
+              </p>
             </div>
           </div>
         </li>
       {% endfor %}
       </ul>
-  <!-- TODO: List all reviews, with user profile pics and stars -->
+  
   {% endif %}
     <br>
     {% if not review_classes %}
