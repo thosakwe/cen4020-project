@@ -7,6 +7,7 @@ from .models import Review
 from users.models import Profile
 import re
 import collections
+from django.db import models
 
 # Create your views here.
 def home(request):
