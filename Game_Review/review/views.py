@@ -1,11 +1,10 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Review, Comment
+from .models import Review, Comment, Like, ReviewVote
 from game.models import Game
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Review
 from users.models import Profile
-from .forms import CommentForm
+from .forms import CommentForm, LikeForm, ReviewVoteForm
 import re
 
 # Create your views here.
@@ -37,25 +36,55 @@ def review_detail(request, pk):
     review = get_object_or_404(Review, pk=pk)
     comments = review.comment_set.all()#.filter(active=True)
     new_comment = None
-    # Comment posted
+    comment_form = CommentForm()
+    like_form = LikeForm()
     if request.method == 'POST':
-        form = CommentForm(request.POST, request.FILES)
-        form.initial['author'] = request.user
-        form.initial['review'] = review
-        if form.is_valid():
-            #content = form.cleaned_data['content']
-            new_comment = Comment()
-            new_comment.review = review
-            new_comment.author = request.user
-            new_comment.content = form.cleaned_data['content']
-            new_comment.save()
-    else:
-        form = CommentForm()
+        # Comment posted
+        if "comment_form" in request.POST:
+            comment_form = CommentForm(request.POST, request.FILES)
+            comment_form.initial['author'] = request.user
+            comment_form.initial['review'] = review
+            if comment_form.is_valid():
+                new_comment = Comment()
+                new_comment.review = review
+                new_comment.author = request.user
+                new_comment.content = comment_form.cleaned_data['content']
+                new_comment.save()
+        
+        # Liked review
+        user_vote = ReviewVote.objects.filter(user=request.user,review=review)
+        if "like_btn" in request.POST:
+            if not user_vote.filter(vote=1):
+                new_like = ReviewVote()
+                new_like.review = review
+                new_like.user = request.user
+                new_like.vote = 1
+                new_like.save()
+            else:
+                user_vote.delete()
+            if user_vote.filter(vote=-1).exists():
+                user_vote.get(vote=-1).delete()
+
+        # Disliked review
+        if "dislike_btn" in request.POST:
+            if not user_vote.filter(vote=-1):
+                new_like = ReviewVote()
+                new_like.review = review
+                new_like.user = request.user
+                new_like.vote = -1
+                new_like.save()
+            else:
+                user_vote.delete()
+            if user_vote.filter(vote=1).exists():
+                user_vote.get(vote=1).delete()
+        
+
     context = {
             'review': review,
             'comments': comments,
             'new_comment': new_comment,
-            'comment_form': form,
+            'comment_form': comment_form,
+            'like_form': like_form,
         }
     return render(request, template_name, context)
 

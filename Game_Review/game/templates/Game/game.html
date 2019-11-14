@@ -39,7 +39,11 @@
                 <p class="media-comment">
                   {{ review.content }}
                 </p>
-                <button class="btn btn-info btn-circle text-uppercase" id="like"> Like {{ review.likes }}</button>
+                <form class="like_form" method="post" style="margin-top: 1.3em;">
+                    {{ like_form }}
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-info btn-circle text-uppercase" id="like"> Like {{ review.get_likes }}</button>
+                </form>
                 <button class="btn btn-warning btn-circle text-uppercase" id="dislike"> Dislike {{ review.dislikes }}</button>
             </div>              
           </div>

@@ -23,6 +23,14 @@ class Review(models.Model):
     def get_absolute_url(self):
         return reverse('review-detail', kwargs={'pk':self.pk})
 
+    #def get_likes(self):
+    #    return self.like_set.all().count()
+    def get_likes(self):
+        return self.reviewvote_set.filter(vote=1).count()
+
+    def get_dislikes(self):
+        return self.reviewvote_set.filter(vote=-1).count()
+
 class Rating(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     on_review = models.ForeignKey(Review, on_delete=models.CASCADE)
@@ -33,9 +41,28 @@ class Comment(models.Model):
     review = models.ForeignKey(Review, on_delete=models.CASCADE)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
+    likes = models.IntegerField(default=0)
+    dislikes = models.IntegerField(default=0)
     # parent_comment = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True)
     class Meta:
         ordering = ['-date_posted']
+
+    def get_likes(self):
+        return 0
+
+    def get_dislikes(self):
+        return 0
+        
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    review = models.ForeignKey(Review, on_delete=models.CASCADE)
+
+class ReviewVote(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    review = models.ForeignKey(Review, on_delete=models.CASCADE)
+    vote = models.IntegerField(default=0)
+    class Meta:
+       unique_together = ("user", "review", "vote")
 """
 class ReplyTo(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)

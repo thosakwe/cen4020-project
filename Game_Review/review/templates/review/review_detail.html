@@ -15,6 +15,16 @@
         </div>
         <h2><a class="article-title">{{ review.title }}</a></h2>
         <p class="article-content">{{ review.content }}</p>
+        {% if user.is_authenticated %}
+        <form class="like_form" method="post" style="margin-top: 1.3em;">
+            {% csrf_token %}
+            <button name="like_btn" class="btn btn-info btn-circle text-uppercase" id="like"> Like {{ review.get_likes }}</button>
+            <button name="dislike_btn" class="btn btn-warning btn-circle text-uppercase" id="dislike"> Dislike {{ review.get_dislikes }}</button>
+        </form>
+        {% else %}
+          <button name="like_btn" class="btn btn-info btn-circle text-uppercase" id="like"> Like {{ review.get_likes }}</button>
+          <button name="dislike_btn" class="btn btn-warning btn-circle text-uppercase" id="dislike"> Dislike {{ review.get_dislikes }}</button>
+        {% endif %}
       </div>
     </article>
     <div class="comment-section">
@@ -26,7 +36,7 @@
         <form class="comment_form" method="post" style="margin-top: 1.3em;">
           {{ comment_form }}
           {% csrf_token %}
-          <button type="submit" class="btn btn-primary  btn-lg">Send</button>
+          <button type="submit" name="comment_form" class="btn btn-primary btn-lg">Send</button>
         </form>
         {% else %}
           <a class="btn btn-primary  btn-lg" href="{% url 'login' %}">Log in to leave a comment</a>
@@ -45,8 +55,11 @@
               <p class="media-comment">
                 {{ comment.content }}
               </p>
-              <button class="btn btn-info btn-circle text-uppercase" id="like"> Like {{ review.likes }}</button>
-              <button class="btn btn-warning btn-circle text-uppercase" id="dislike"> Dislike {{ review.dislikes }}</button>
+              <form class="like_form" method="post" style="margin-top: 1.3em;">
+                  {% csrf_token %}
+                  <button name="clike_btn" class="btn btn-info btn-circle text-uppercase" id="like"> Like {{ comment.get_likes }}</button>
+                  <button name="cdislike_btn" class="btn btn-warning btn-circle text-uppercase" id="dislike"> Dislike {{ comment.get_dislikes }}</button>
+              </form>
           </div>              
         </div>
       </li>
