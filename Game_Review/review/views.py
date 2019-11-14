@@ -1,10 +1,11 @@
-from django.shortcuts import render
-from .models import Review
+from django.shortcuts import render, get_object_or_404
+from .models import Review, Comment
 from game.models import Game
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Review
 from users.models import Profile
+from .forms import CommentForm
 import re
 
 # Create your views here.
@@ -30,6 +31,34 @@ class ReviewListView(ListView):
     template_name = "review/review.html"
     context_object_name = 'review'
     ordering = ['date_posted']
+
+def review_detail(request, pk):
+    template_name = 'review/review_detail.html'
+    review = get_object_or_404(Review, pk=pk)
+    comments = review.comment_set.all()#.filter(active=True)
+    new_comment = None
+    # Comment posted
+    if request.method == 'POST':
+        form = CommentForm(request.POST, request.FILES)
+        form.initial['author'] = request.user
+        form.initial['review'] = review
+        if form.is_valid():
+            #content = form.cleaned_data['content']
+            new_comment = Comment()
+            new_comment.review = review
+            new_comment.author = request.user
+            new_comment.content = form.cleaned_data['content']
+            new_comment.save()
+    else:
+        form = CommentForm()
+    context = {
+            'review': review,
+            'comments': comments,
+            'new_comment': new_comment,
+            'comment_form': form,
+            'profile': Profile.objects.get(user=request.user),
+        }
+    return render(request, template_name, context)
 
 class ReviewDetailView(DetailView):
     model = Review

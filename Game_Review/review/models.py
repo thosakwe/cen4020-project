@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 from game.models import Game
 
@@ -29,6 +30,14 @@ class Rating(models.Model):
 
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    on_review = models.ForeignKey(Review, on_delete=models.CASCADE)
+    review = models.ForeignKey(Review, on_delete=models.CASCADE)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
+    # parent_comment = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True)
+    class Meta:
+        ordering = ['-date_posted']
+"""
+class ReplyTo(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    response = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="response")
+"""

@@ -91,7 +91,6 @@ img.avatar {
 }
 .ex1 {
   position: absolute;
-  left: 500px;
   float: right;
   margin-left: 400px;
 } 
@@ -100,7 +99,7 @@ div#para1 {
   font-style: italic;
 }
 
-.media .media-object { 
+.message-avatar { 
   height: 5em;
   width: 5em;
   object-fit: cover;

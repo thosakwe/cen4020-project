@@ -28,7 +28,7 @@
       {% for review in reviews %}
         <li class="media">
           <a class="pull-left" href="{% url 'profile' review.author.id %}">
-            <img class="media-object rounded-circle"  src="{{ review.author.profile.avatar }}" alt="{{ the_user.username }}">
+            <img class="message-avatar"  src="{{ review.author.profile.avatar }}" alt="{{ the_user.username }}">
             <!-- <img class="media-object rounded-circle"  src="{{ profile.avatar }}" alt="{{ the_user.username }}"> -->
           </a>
           <div class="media-body">
