@@ -1,11 +1,13 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Review, Comment, Like, ReviewVote
+from .models import Review, Comment, Like, ReviewVote, CommentVote
 from game.models import Game
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.http import HttpResponseRedirect
 from users.models import Profile
 from .forms import CommentForm, LikeForm, ReviewVoteForm
 import re
+import json
 
 # Create your views here.
 def home(request):
@@ -40,6 +42,7 @@ def review_detail(request, pk):
     like_form = LikeForm()
     if request.method == 'POST':
         # Comment posted
+        print(request.POST)
         if "comment_form" in request.POST:
             comment_form = CommentForm(request.POST, request.FILES)
             comment_form.initial['author'] = request.user
@@ -70,6 +73,36 @@ def review_detail(request, pk):
             if not user_vote.filter(vote=-1):
                 new_like = ReviewVote()
                 new_like.review = review
+                new_like.user = request.user
+                new_like.vote = -1
+                new_like.save()
+            else:
+                user_vote.delete()
+            if user_vote.filter(vote=1).exists():
+                user_vote.get(vote=1).delete()
+
+        # Liked review
+        if "clike_btn" in request.POST:
+            comment = get_object_or_404(Comment, pk=int(request.POST['clike_btn']))
+            user_vote = CommentVote.objects.filter(user=request.user,comment=comment)
+            if not user_vote.filter(vote=1):
+                new_like = CommentVote()
+                new_like.comment = comment
+                new_like.user = request.user
+                new_like.vote = 1
+                new_like.save()
+            else:
+                user_vote.delete()
+            if user_vote.filter(vote=-1).exists():
+                user_vote.get(vote=-1).delete()
+
+        # Disliked review
+        if "cdislike_btn" in request.POST:
+            comment = get_object_or_404(Comment, pk=int(request.POST['cdislike_btn']))
+            user_vote = CommentVote.objects.filter(user=request.user,comment=comment)
+            if not user_vote.filter(vote=-1):
+                new_like = CommentVote()
+                new_like.comment = comment
                 new_like.user = request.user
                 new_like.vote = -1
                 new_like.save()
