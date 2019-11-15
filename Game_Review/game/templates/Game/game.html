@@ -78,6 +78,7 @@
   {% endif %}
   <hr>
   <a class="btn btn-primary" href="{% url 'review-create' game=game.id %}">Leave a Review</a>
+  <a class="btn btn-primary" href="{% url 'playthrough-create' game=game.id %}">Post a Playthrough</a>
 </div>
 {% endblock content %}
 
