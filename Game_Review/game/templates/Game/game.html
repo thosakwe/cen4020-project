@@ -1,4 +1,4 @@
-\{% extends "review/base.html" %}
+{% extends "review/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="content-section">
@@ -58,7 +58,7 @@
       {% for review in reviews %}
         <li class="media">
           <a class="pull-left" href="{% url 'profile' review.author.id %}">
-            <img class="media-object rounded-circle"  src="{{ review.author.profile.avatar }}" alt="{{ the_user.username }}">
+            <img class="message-avatar"  src="{{ review.author.profile.avatar }}" alt="{{ the_user.username }}">
             <!-- <img class="media-object rounded-circle"  src="{{ profile.avatar }}" alt="{{ the_user.username }}"> -->
           </a>
           <div class="media-body">
@@ -69,8 +69,6 @@
                 <p class="media-comment">
                   {{ review.content }}
                 </p>
-                <a class="btn btn-info btn-circle text-uppercase" href="#" id="like"> Like {{ review.likes }}</a>
-                <a class="btn btn-warning btn-circle text-uppercase"  href="#" id="dislike"> Dislike {{ review.dislikes }}</a>
             </div>              
           </div>
         </li>
@@ -80,9 +78,7 @@
   {% endif %}
   <hr>
   <a class="btn btn-primary" href="{% url 'review-create' game=game.id %}">Leave a Review</a>
-    <a class="btn btn-primary" href="{% url 'playthrough-create' game=game.id %}">Post a Playthrough</a>
 </div>
-
 {% endblock content %}
 
 {% block scripts %}

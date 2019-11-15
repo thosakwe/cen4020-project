@@ -1,19 +1,68 @@
 {% extends "review/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
     <article class="media content-section">
       <div class="media-body">
         <div class="article-metadata">
-          <a class="mr-2" href="#">{{ object.author }}</a>
-          <small class="text-muted">{{ object.date_reviewed|date:"F d, Y" }}</small>
-          {% if object.author == user %}
+          <a class="mr-2" href="#">{{ review.author }}</a>
+          <small class="text-muted">{{ review.date_reviewed|date:"F d, Y" }}</small>
+          {% if review.author == user %}
             <div>
-              <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'review-update' object.id %}">Update</a>
-              <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'review-delete' object.id %}">Delete</a>
+              <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'review-update' review.id %}">Update</a>
+              <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'review-delete' review.id %}">Delete</a>
             </div>
           {% endif %}
         </div>
-        <h2><a class="article-title">{{ object.title }}</a></h2>
-        <p class="article-content">{{ object.content }}</p>
+        <h2><a class="article-title">{{ review.title }}</a></h2>
+        <p class="article-content">{{ review.content }}</p>
+        {% if user.is_authenticated %}
+        <form class="like_form" method="post" style="margin-top: 1.3em;">
+            {% csrf_token %}
+            <button name="like_btn" class="btn btn-info btn-circle text-uppercase" id="like"> Like {{ review.get_likes }}</button>
+            <button name="dislike_btn" class="btn btn-warning btn-circle text-uppercase" id="dislike"> Dislike {{ review.get_dislikes }}</button>
+        </form>
+        {% else %}
+          <button name="like_btn" class="btn btn-info btn-circle text-uppercase" id="like"> Like {{ review.get_likes }}</button>
+          <button name="dislike_btn" class="btn btn-warning btn-circle text-uppercase" id="dislike"> Dislike {{ review.get_dislikes }}</button>
+        {% endif %}
       </div>
     </article>
+    <div class="comment-section">
+      <li class="media">
+        {% if user.is_authenticated %}
+          <a class="pull-left" href="{% url 'profile' user.id %}">
+            <img class="message-avatar"  src="{{ user.profile.avatar }}" alt="{{ the_user.username }}">
+          </a>
+        <form class="comment_form" method="post" style="margin-top: 1.3em;">
+          {{ comment_form }}
+          {% csrf_token %}
+          <button type="submit" name="comment_form" class="btn btn-primary btn-lg">Send</button>
+        </form>
+        {% else %}
+          <a class="btn btn-primary  btn-lg" href="{% url 'login' %}">Log in to leave a comment</a>
+          <a class="btn btn-primary  btn-lg" href="{% url 'register' %}">Register if you don't have an account</a>
+        {% endif %}
+      </li>
+      {% for comment in comments %}
+      <li class="media">
+        <a class="pull-left" href="{% url 'profile' comment.author.id %}">
+          <img class="message-avatar"  src="{{ comment.author.profile.avatar }}" alt="{{ the_user.username }}">
+        </a>
+        <div class="media-body">
+          <div class="well well-lg">
+              <h2><a class="media-heading text-uppercase reviews" href="#">{{ comment.author }}</a></h2>
+              <small class="text-muted">{{ comment.date_reviewed|date:"F d, Y" }}</small>    
+              <p class="media-comment">
+                {{ comment.content }}
+              </p>
+              <form class="like_form" method="post" style="margin-top: 1.3em;">
+                  {% csrf_token %}
+                  <button name="clike_btn" class="btn btn-info btn-circle text-uppercase" value="{{ comment.id }}" id="like"> Like {{ comment.get_likes }}</button>
+                  <button name="cdislike_btn" class="btn btn-warning btn-circle text-uppercase" value="{{ comment.id }}" id="dislike"> Dislike {{ comment.get_dislikes }}</button>
+              </form>
+          </div>              
+        </div>
+      </li>
+      {% endfor %}
+    </div>
 {% endblock content %}
