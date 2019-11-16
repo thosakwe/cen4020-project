@@ -1,3 +1,6 @@
+# Second Iteration
+Video link is here: https://youtu.be/CGdHKdQmwL8
+
 # Task List
 * [x] Git repository
 * [x] Project setup - Django
