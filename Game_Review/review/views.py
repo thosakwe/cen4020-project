@@ -136,6 +136,7 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
     fields = ['title','content']
 
     def form_valid(self, form):
+        print(self.kwargs)
         game = Game.objects.get(pk=self.kwargs['game'])
         form.instance.author = self.request.user
         form.instance.game = game

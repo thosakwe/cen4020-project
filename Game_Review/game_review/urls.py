@@ -17,6 +17,9 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
+# This is for video uploads
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -27,4 +30,4 @@ urlpatterns = [
     path('', include('review.urls')),
     path('', include('playthroughs.urls')),
     path('', include('search.urls')),
-]
+] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
