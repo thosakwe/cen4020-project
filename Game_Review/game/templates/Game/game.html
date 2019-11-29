@@ -1,10 +1,40 @@
-\{% extends "review/base.html" %}
+{% extends "review/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="content-section">
   <h1>{{ game.title }}</h1>
   <img style="max-height: 20em;" src="{{ game.image_path }}" alt="{{ game.title }}">
   <p>
+  <br>
+    {% if not playthroughs_classes %}
+    <i>This game has no playthroughs.</i>
+    <br>
+    {% endif %}
+  {% if playthroughs %}
+  <hr>
+  <h5>playthroughs ({{ playthroughss | length }})</h5>
+      <ul class="media-list">
+      {% for playthroughs in playthroughss %}
+        <li class="media">
+          <a class="pull-left" href="{% url 'profile' playthroughs.author.id %}">
+            <img class="media-object rounded-circle"  src="{{ playthroughs.author.profile.avatar }}" alt="{{ the_user.username }}">
+            <!-- <img class="media-object rounded-circle"  src="{{ profile.avatar }}" alt="{{ the_user.username }}"> -->
+          </a>
+          <div class="media-body">
+            <div class="well well-lg">
+                <h2><a class="media-heading text-uppercase reviews" href="{% url 'playthrough-detail' playthroughs.id %}">{{ playthroughs.title }}</a></h2>
+                <a class="mr-2" href="#">{{ playthroughs.author }}</a>
+                <small class="text-muted">{{ playthroughs.date_posted|date:"F d, Y" }}</small>
+                <p class="media-comment">
+                  {{ playthroughs.content }}
+              </p>
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+      </ul>
+  
+  {% endif %}
     <br>
     {% if not review_classes %}
     <i>This game has no reviews yet.</i>
@@ -48,6 +78,7 @@
   {% endif %}
   <hr>
   <a class="btn btn-primary" href="{% url 'review-create' game=game.id %}">Leave a Review</a>
+  <a class="btn btn-primary" href="{% url 'playthrough-create' game=game.id %}">Post a Playthrough</a>
 </div>
 {% endblock content %}
 

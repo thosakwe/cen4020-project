@@ -3,19 +3,19 @@
 {% block content %}
 <div class="content-section">
     <h1>
-        {% if user.profile.avatar %}
-        <img src="{{ user.profile.avatar }}" alt="{{ the_user.username }}" class="avatar">
+        {% if the_user.profile.avatar %}
+        <img src="{{ the_user.profile.avatar }}" alt="{{ the_user.username }}" class="avatar">
         {% endif %}
         {{ the_user.username }}
     </h1>
-    {% if not profile.bio %}
+    {% if not the_user.profile.bio %}
     <p>
         <i>{{ the_user.username }} has not yet added a bio.</i>
     </p>
     {% else %}
     <p>
         <b>Bio:</b>
-        {{ user.profile.bio }}
+        {{ the_user.profile.bio }}
     </p>
     {% endif %}
     {% for error in errors %}
@@ -33,7 +33,7 @@
         <div class="form-group">
             <label for="bioInput">Your Bio:</label>
             <textarea id="bioInput" class="form-control" placeholder="Write a bio..."
-                name="bio">{{ profile.bio }}</textarea>
+                name="bio">{{ the_user.profile.bio }}</textarea>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

@@ -35,7 +35,7 @@ def profile(request,id):
     errors = []
     user_id = int(request.GET.get('user_id', request.user.id))
     # TODO: If the user does not exist, display a 404 page.
-    the_user = User.objects.get(pk=user_id)
+    the_user = User.objects.get(pk=id)
     profile, _ = Profile.objects.get_or_create(user=the_user)
 
     if request.method == "POST":

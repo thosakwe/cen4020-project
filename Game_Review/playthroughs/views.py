@@ -30,22 +30,27 @@ class PlaythroughListView(ListView):
 
 class PlaythroughDetailView(DetailView):
     model = playthroughs
-    template_name = "playthrough/playthrough_detail.html"
+    template_name = "playthroughs/playthroughs_detail.html"
 
 class PlaythroughCreateView(LoginRequiredMixin, CreateView):
     model = playthroughs
-    fields = ['title','content']
+    fields = ['title','content', 'videofile']
 
     def form_valid(self, form):
         game = Game.objects.get(pk=self.kwargs['game'])
         form.instance.author = self.request.user
-        form.instance.game_id = game.id
-        form.instance.score = 3
+        form.instance.game = game
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        print(self.kwargs)
+        print(self.request.user)
+        print(form.cleaned_data)
+        print("form is invalid")
 
 class PlaythroughUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = playthroughs
-    fields = ['title', 'content']
+    fields = ['title', 'content', 'videofile']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -53,7 +58,7 @@ class PlaythroughUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView)
         return super().form_valid(form)
 
     def test_func(self):
-        review = self.get_object()
+        playthroughs = self.get_object()
         if self.request.user == playthroughs.author:
             return True
         else:

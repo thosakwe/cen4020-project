@@ -7,6 +7,8 @@ from django.http import HttpResponseRedirect
 from users.models import Profile
 from .forms import CommentForm, LikeForm, ReviewVoteForm
 import re
+import collections
+from django.db import models
 import json
 
 # Create your views here.
@@ -21,7 +23,8 @@ def home(request):
 
 def news(request):
     games = Game.objects.all()
-    return render(request, 'review/news.html', {'games':games})
+    review = Review.objects.order_by('-score')
+    return render(request, 'review/news.html',{'games':games,'review':review})
 
 class ReviewListView(ListView):
     """
@@ -133,6 +136,7 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
     fields = ['title','content']
 
     def form_valid(self, form):
+        print(self.kwargs)
         game = Game.objects.get(pk=self.kwargs['game'])
         form.instance.author = self.request.user
         form.instance.game = game
