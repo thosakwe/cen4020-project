@@ -35,4 +35,4 @@ class Playthrough_Comment(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.game.title + "\n" + self.videofile
+        return self.game.title + "\n" + self.name + "\n" + self.videofile
