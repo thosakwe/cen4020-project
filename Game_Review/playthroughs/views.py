@@ -67,7 +67,7 @@ class PlaythroughUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView)
 class PlaythroughDeleteView(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
     model = playthroughs
     success_url = '/'
-    template_name = "playthrough/playthrough_delete.html"
+    template_name = "playthroughs/playthroughs_delete.html"
     def test_func(self):
         playthroughs = self.get_object()
         if self.request.user == playthroughs.author:
