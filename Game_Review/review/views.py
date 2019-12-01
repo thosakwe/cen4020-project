@@ -20,11 +20,17 @@ def home(request):
         game.image_path = re.sub(r'^review', '', path)
     context = {'games': games,'list':lst}
     return render(request, 'review/home.html', context)
-
 def news(request):
+    lst = []
+    dic = {}
     games = Game.objects.all()
+    games = games.values_list('title',flat=True).distinct()
     review = Review.objects.order_by('-score')
-    return render(request, 'review/news.html',{'games':games,'review':review})
+    for i in review:
+        if i.game not in dic:
+            lst.append(i)
+            dic[i.game] = 'entered'
+    return render(request, 'review/news.html',{'games':games,'review':lst})
 
 class ReviewListView(ListView):
     """
