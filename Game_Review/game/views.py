@@ -17,6 +17,10 @@ import re
 def get_by_id(request, id):
     game = Game.objects.get(pk=id)
     reviews = Review.objects.filter(game=game)
+    playthroughss = playthroughs.objects.filter(game=game)
+
+    if not playthroughss:
+        playthroughs_classes = []
     if not reviews:
         review_classes = []
     else:
