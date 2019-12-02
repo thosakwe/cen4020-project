@@ -13,6 +13,12 @@
           {% endif %}
         </div>
         <h2><a class="article-title">{{ object.title }}</a></h2>
+        <br><br>
+        <video controls>
+          <source src='{{ MEDIA_URL }}{{ object.videofile }}' type='video/mp4'>
+          Your browser does not support the video tag.
+        </video>
+        <br><br>
         <p class="article-content">{{ object.content }}</p>
       </div>
     </article>

@@ -7,6 +7,7 @@ from review.models import Review
 from statistics import mean
 from .forms import NewGameForm
 from .models import Game, game_public_url
+from playthroughs.models import playthroughs
 from users.models import Profile
 import os
 import re
@@ -19,9 +20,7 @@ def get_by_id(request, id):
     reviews = Review.objects.filter(game=game)
     playthroughss = playthroughs.objects.filter(game=game)
 
-    if not playthroughss:
-        playthroughs_classes = []
-    if not reviews:
+    if not reviews.exists():
         review_classes = []
     else:
         avg_review = mean([r.score for r in reviews])
@@ -37,6 +36,7 @@ def get_by_id(request, id):
         'image_url': game_public_url(game),
         'review_classes': review_classes, 
         'reviews': reviews,
+        'playthroughss': playthroughss,
     }
     return render(request, 'Game/game.html', context)
 

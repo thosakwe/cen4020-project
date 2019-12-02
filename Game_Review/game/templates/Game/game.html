@@ -6,11 +6,11 @@
   <img style="max-height: 20em;" src="{{ game.image_path }}" alt="{{ game.title }}">
   <p>
   <br>
-    {% if not playthroughs_classes %}
+    {% if not playthroughss.exists %}
     <i>This game has no playthroughs.</i>
     <br>
     {% endif %}
-  {% if playthroughs %}
+  {% if playthroughss %}
   <hr>
   <h5>playthroughs ({{ playthroughss | length }})</h5>
       <ul class="media-list">
@@ -30,7 +30,7 @@
               </p>
               <br><br>
                 <video width='400' controls>
-                <source src='{{ MEDIA_URL }}{{ videofile }}' type='video/mp4'>
+                <source src='{{ MEDIA_URL }}{{ playthroughs.videofile }}' type='video/mp4'>
                 Your browser does not support the video tag.
                 </video>
                 <br><br>
@@ -42,7 +42,7 @@
   
   {% endif %}
     <br>
-    {% if not review_classes %}
+    {% if not reviews.exists %}
     <i>This game has no reviews yet.</i>
     <br>
     {% else %}
