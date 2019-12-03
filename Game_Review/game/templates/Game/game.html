@@ -35,7 +35,7 @@
           <div class="media-body">
             <div class="well well-lg">
                 <h2><a class="media-heading text-uppercase reviews" href="{% url 'review-detail' review.id %}">{{ review.title }}</a></h2>
-                <a class="mr-2" href="#">{{ review.author }}</a>
+                <a class="mr-2" href="{% url 'profile' review.author.id %}">{{ review.author }}</a>
                 <small class="text-muted">{{ review.date_reviewed|date:"F d, Y" }}</small>    
                 <p class="media-comment">
                   {{ review.content }}
@@ -59,13 +59,13 @@
     {% for playthroughs in playthroughss %}
       <li class="media">
         <a class="pull-left" href="{% url 'profile' playthroughs.author.id %}">
-          <img class="media-object rounded-circle"  src="{{ playthroughs.author.profile.avatar }}" alt="{{ the_user.username }}">
+          <img class="message-avatar"  src="{{ playthroughs.author.profile.avatar }}" alt="{{ the_user.username }}">
           <!-- <img class="media-object rounded-circle"  src="{{ profile.avatar }}" alt="{{ the_user.username }}"> -->
         </a>
         <div class="media-body">
           <div class="well well-lg">
               <h2><a class="media-heading text-uppercase reviews" href="{% url 'playthrough-detail' playthroughs.id %}">{{ playthroughs.title }}</a></h2>
-              <a class="mr-2" href="#">{{ playthroughs.author }}</a>
+              <a class="mr-2" href="{% url 'profile' playthroughs.author.id %}">{{ playthroughs.author }}</a>
               <small class="text-muted">{{ playthroughs.date_posted|date:"F d, Y" }}</small>
               <p class="media-comment">
                 {{ playthroughs.content }}

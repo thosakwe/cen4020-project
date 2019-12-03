@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from game.models import Game
 from embed_video.fields import EmbedVideoField
+from math import floor
 
 
 # Create your models here.
@@ -25,7 +26,7 @@ class playthroughs(models.Model):
         return self.playthroughvote_set.filter(vote=-1).count()
 
     def get_average(self):
-        average = int(self.get_likes()/(self.get_likes()+self.get_dislikes())) * 100
+        average = int(self.get_likes()/(self.get_likes()+self.get_dislikes()) * 100)
         return f"{str(average)}%"
     #video = EmbedVideoField()
 

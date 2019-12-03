@@ -28,7 +28,7 @@ class Review(models.Model):
         return self.reviewvote_set.filter(vote=-1).count()
 
     def get_average(self):
-        average = int(self.get_likes()/(self.get_likes()+self.get_dislikes())) * 100
+        average = int(self.get_likes()/(self.get_likes()+self.get_dislikes()) * 100)
         return f"{str(average)}%"
     
 class Rating(models.Model):
