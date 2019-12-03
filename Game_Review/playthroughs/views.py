@@ -1,11 +1,15 @@
-from django.shortcuts import render
-from .models import playthroughs
+from django.shortcuts import render, get_object_or_404
+from .models import playthroughs, PlaythroughComment, PlaythroughVote, PlaythroughCommentVote
+from django.http import HttpResponseRedirect
+
 from game.models import Game
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render
 #from .models import Video
 from .forms import VideoForm
+from review.forms import CommentForm
+
 
 
 # Create your views here.
@@ -28,9 +32,90 @@ class PlaythroughListView(ListView):
     context_object_name = 'playthrough'
     ordering = ['date_posted']
 
-class PlaythroughDetailView(DetailView):
-    model = playthroughs
+def playthrough_detail(request,pk):
     template_name = "playthroughs/playthroughs_detail.html"
+    playthrough = get_object_or_404(playthroughs, pk=pk)
+    comments = playthrough.playthroughcomment_set.all()#.filter(active=True)
+    new_comment = None
+    comment_form = CommentForm()
+    if request.method == 'POST':
+        # PlaythroughComment posted
+        print(request.POST)
+        if "comment_form" in request.POST:
+            comment_form = CommentForm(request.POST, request.FILES)
+            comment_form.initial['author'] = request.user
+            comment_form.initial['playthrough'] = playthrough
+            if comment_form.is_valid():
+                new_comment = PlaythroughComment()
+                new_comment.playthrough = playthrough
+                new_comment.author = request.user
+                new_comment.content = comment_form.cleaned_data['content']
+                new_comment.save()
+        
+        # Liked playthrough
+        user_vote = PlaythroughVote.objects.filter(user=request.user,playthrough=playthrough)
+        if "like_btn" in request.POST:
+            if not user_vote.filter(vote=1):
+                new_like = PlaythroughVote()
+                new_like.playthrough = playthrough
+                new_like.user = request.user
+                new_like.vote = 1
+                new_like.save()
+            else:
+                user_vote.delete()
+            if user_vote.filter(vote=-1).exists():
+                user_vote.get(vote=-1).delete()
+
+        # Disliked playthrough
+        if "dislike_btn" in request.POST:
+            if not user_vote.filter(vote=-1):
+                new_like = PlaythroughVote()
+                new_like.playthrough = playthrough
+                new_like.user = request.user
+                new_like.vote = -1
+                new_like.save()
+            else:
+                user_vote.delete()
+            if user_vote.filter(vote=1).exists():
+                user_vote.get(vote=1).delete()
+
+        # Liked playthrough
+        if "clike_btn" in request.POST:
+            comment = get_object_or_404(PlaythroughComment, pk=int(request.POST['clike_btn']))
+            user_vote = PlaythroughCommentVote.objects.filter(user=request.user,comment=comment)
+            if not user_vote.filter(vote=1):
+                new_like = PlaythroughCommentVote()
+                new_like.comment = comment
+                new_like.user = request.user
+                new_like.vote = 1
+                new_like.save()
+            else:
+                user_vote.delete()
+            if user_vote.filter(vote=-1).exists():
+                user_vote.get(vote=-1).delete()
+
+        # Disliked playthrough
+        if "cdislike_btn" in request.POST:
+            comment = get_object_or_404(PlaythroughComment, pk=int(request.POST['cdislike_btn']))
+            user_vote = PlaythroughCommentVote.objects.filter(user=request.user,comment=comment)
+            if not user_vote.filter(vote=-1):
+                new_like = PlaythroughCommentVote()
+                new_like.comment = comment
+                new_like.user = request.user
+                new_like.vote = -1
+                new_like.save()
+            else:
+                user_vote.delete()
+            if user_vote.filter(vote=1).exists():
+                user_vote.get(vote=1).delete()
+        return HttpResponseRedirect("")
+    context = {
+            'object': playthrough,
+            'comments': comments,
+            'new_comment': new_comment,
+            'comment_form': comment_form,
+        }
+    return render(request, template_name, context)
 
 class PlaythroughCreateView(LoginRequiredMixin, CreateView):
     model = playthroughs

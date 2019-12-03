@@ -4,7 +4,7 @@
     <article class="media content-section">
       <div class="media-body">
         <div class="article-metadata">
-          <a class="mr-2" href="#">{{ review.author }}</a>
+          <a class="mr-2" href="{% url 'profile' review.author.id %}">{{ review.author }}</a>
           <small class="text-muted">{{ review.date_reviewed|date:"F d, Y" }}</small>
           {% if review.author == user %}
             <div>

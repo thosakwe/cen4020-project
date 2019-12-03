@@ -7,7 +7,8 @@ from django.forms.models import model_to_dict
 from django.http import JsonResponse
 from .models import Profile
 import os
-
+from review.models import Review
+from playthroughs.models import playthroughs
 # Create your views here.
 
 
@@ -37,6 +38,8 @@ def profile(request,id):
     # TODO: If the user does not exist, display a 404 page.
     the_user = User.objects.get(pk=id)
     profile, _ = Profile.objects.get_or_create(user=the_user)
+    reviews = Review.objects.filter(author=the_user)
+    playthroughss = playthroughs.objects.filter(author=the_user)
 
     if request.method == "POST":
         if the_user.id != request.user.id:
@@ -71,4 +74,11 @@ def profile(request,id):
                 profile.save()
             else:
                 errors = form.errors
-    return render(request, 'users/profile.html', {'errors': errors, 'profile': profile, 'the_user': the_user})
+    context = {
+        'errors': errors,
+        'profile': profile,
+        'the_user': the_user,
+        'reviews':reviews,
+        'playthroughs':playthroughss,
+    }
+    return render(request, 'users/profile.html', context)

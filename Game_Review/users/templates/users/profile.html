@@ -8,6 +8,7 @@
         {% endif %}
         {{ the_user.username }}
     </h1>
+    <h2>Total Karma {{ the_user.profile.get_karma }}</h2>
     {% if not the_user.profile.bio %}
     <p>
         <i>{{ the_user.username }} has not yet added a bio.</i>
@@ -39,4 +40,14 @@
     </form>
 </div>
 {% endif %}
+<div class="user-made-content">
+    <p>Links to reviews made by {{ the_user.username }}</p>
+    {% for review in reviews %}
+        <a href="{{ review.get_absolute_url }}">{{ review.title }}</a>
+    {% endfor %}
+    <p>Links to playthroughs posted by {{ the_user.username }}</p>
+    {% for playthrough in playthroughs %}
+        <a href="{{ playthrough.get_absolute_url }}">{{ playthrough.title }}</a>
+    {% endfor %}
+</div>
 {% endblock content %}
