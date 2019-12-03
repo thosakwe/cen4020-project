@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from .views import PlaythroughListView, PlaythroughDetailView, PlaythroughCreateView, PlaythroughUpdateView, PlaythroughDeleteView
+from .views import PlaythroughListView, playthrough_detail, PlaythroughCreateView, PlaythroughUpdateView, PlaythroughDeleteView
 from . import views
 from django.conf.urls import url, include
 from django.contrib import admin
@@ -8,7 +8,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.home, name='playthrough-home'),
-    path('playthroughs/<int:pk>/',PlaythroughDetailView.as_view(), name="playthrough-detail"),
+    path('playthroughs/<int:pk>/',playthrough_detail, name="playthrough-detail"),
     path('playthroughs/new/<int:game>/', PlaythroughCreateView.as_view(), name="playthrough-create"),
     path('playthroughs/<int:pk>/update/', PlaythroughUpdateView.as_view(), name="playthrough-update"),
     path('playthroughs/<int:pk>/delete/', PlaythroughDeleteView.as_view(), name="playthrough-delete"),

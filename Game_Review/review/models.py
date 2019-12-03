@@ -14,8 +14,6 @@ class Review(models.Model):
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     score = models.IntegerField()
-    likes = models.IntegerField(default=0)
-    dislikes = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
@@ -23,13 +21,15 @@ class Review(models.Model):
     def get_absolute_url(self):
         return reverse('review-detail', kwargs={'pk':self.pk})
 
-    #def get_likes(self):
-    #    return self.like_set.all().count()
     def get_likes(self):
         return self.reviewvote_set.filter(vote=1).count()
 
     def get_dislikes(self):
         return self.reviewvote_set.filter(vote=-1).count()
+
+    def get_average(self):
+        average = int(self.get_likes()/(self.get_likes()+self.get_dislikes())) * 100
+        return f"{str(average)}%"
     
 class Rating(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -41,8 +41,6 @@ class Comment(models.Model):
     review = models.ForeignKey(Review, on_delete=models.CASCADE)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
-    likes = models.IntegerField(default=0)
-    dislikes = models.IntegerField(default=0)
     # parent_comment = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True)
     class Meta:
         ordering = ['-date_posted']
@@ -52,10 +50,6 @@ class Comment(models.Model):
 
     def get_dislikes(self):
         return self.commentvote_set.filter(vote=-1).count()
-        
-class Like(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    review = models.ForeignKey(Review, on_delete=models.CASCADE)
 
 class ReviewVote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

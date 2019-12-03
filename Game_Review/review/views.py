@@ -1,11 +1,11 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Review, Comment, Like, ReviewVote, CommentVote
+from .models import Review, Comment, ReviewVote, CommentVote
 from game.models import Game
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponseRedirect
 from users.models import Profile
-from .forms import CommentForm, LikeForm, ReviewVoteForm
+from .forms import CommentForm
 import re
 import collections
 from django.db import models
@@ -48,7 +48,6 @@ def review_detail(request, pk):
     comments = review.comment_set.all()#.filter(active=True)
     new_comment = None
     comment_form = CommentForm()
-    like_form = LikeForm()
     if request.method == 'POST':
         # Comment posted
         print(request.POST)
@@ -125,7 +124,6 @@ def review_detail(request, pk):
             'comments': comments,
             'new_comment': new_comment,
             'comment_form': comment_form,
-            'like_form': like_form,
         }
     return render(request, template_name, context)
 
