@@ -6,15 +6,12 @@
     {{ searched }}
     <button type="submit">Submit</button>
 </form>
-
   {% for game in result %}
       <ul>
           <li>
               <div class=figure>
-                {% if found %}
                   <a href="{% url 'game' game.pk %}">
                       <img alt="game_name" src="{{game.image_path.url}}" width="184" height="255">
-                {% endif %}
                       <figcaption> {{ game.title }} </figcaption>
                   </a>
               </div>
