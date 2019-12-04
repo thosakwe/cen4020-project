@@ -26,8 +26,16 @@ class playthroughs(models.Model):
         return self.playthroughvote_set.filter(vote=-1).count()
 
     def get_average(self):
-        average = int(self.get_likes()/(self.get_likes()+self.get_dislikes()) * 100)
-        return f"{str(average)}%"
+        if not self.get_dislikes():
+            val = 100
+        else:
+            val = (self.get_likes() * 100) / self.get_dislikes()
+            val = round(val)
+        return f"{str(val)}%"
+
+    # def get_average(self):
+    #     average = int(self.get_likes()/(self.get_likes()+self.get_dislikes()) * 100)
+    #     return f"{str(average)}%"
     #video = EmbedVideoField()
 
 class PlaythroughComment(models.Model):
