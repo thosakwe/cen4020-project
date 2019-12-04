@@ -64,8 +64,8 @@
 
       {% if playthroughss %}
       <hr>
-      <h5>playthroughs ({{ playthroughss | length }})</h5>
-      <ul class="media-list">
+      <h5>Playthroughs ({{ playthroughss | length }})</h5>
+      <ul class="media-list" style="padding: 0">
         {% for playthroughs in playthroughss %}
         <li class="media">
           <a class="pull-left" href="{% url 'profile' playthroughs.author.id %}">

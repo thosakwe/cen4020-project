@@ -243,6 +243,11 @@ figure figcaption {
   padding-top: 5.5em;
 }
 
+.game-page .main-content img {
+  border-radius: 4px;
+  border: 1px solid #dedede;
+}
+
 .has-backdrop {
     background: rgba(115, 54, 53, 0.05);
     border-radius: 4px 4px 0 0;
