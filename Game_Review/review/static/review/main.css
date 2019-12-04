@@ -201,6 +201,45 @@ figure figcaption {
     text-decoration: none !important;
 }
 
+.game-page {
+  padding: 0;
+  position: relative;
+}
+
+.game-page .top-section {
+  position: relative;
+}
+
+.game-page .backdrop {
+  border-radius: 4px 4px 0 0;
+  position: absolute;
+  width: 100%;
+  height: 5em;
+  object-fit: cover;
+}
+
+.game-page h1 {
+  color: white;
+  position: absolute;
+  top: 0.5em;
+  left: 0.5em;
+  z-index: 999;
+}
+
+.game-page img.backdrop {
+  opacity: 0.5;
+}
+
+.game-page div.backdrop {
+  background: black;
+  opacity: 0.75;
+}
+
+.game-page .main-content {
+  padding: 1em;
+  padding-top: 5.5em;
+}
+
 .has-backdrop {
     background: rgba(115, 54, 53, 0.05);
     border-radius: 4px 4px 0 0;
