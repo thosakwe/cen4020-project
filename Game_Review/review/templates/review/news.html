@@ -1,25 +1,25 @@
 {% extends "review/base.html" %}
 {% block content %}
-<div class="content-section">
-        <h4> <i>Trending Video Games This Week </i> </h4>
-        {% for gam in review %}
-          {% if forloop.counter < 4 %}
-          <ul>
-              <li>
-                  <div class=figure >
-                      <a href="{% url 'game' gam.game.pk %}">
-                          <img alt="game_name" src="{{gam.game.image_path.url}}
+
+<h4>Trending Video Games This Week</h4>
+<div class="game-table">
+    {% for gam in review %}
+    {% if forloop.counter < 4 %}
+    <div class="game-td">
+        <a href="{% url 'game' gam.game.pk %}">
+            <img alt="game_name" src="{{gam.game.image_path.url}}
                           " width="184" height="255">
-                          <figcaption style="float: right; text-align: middle;"> 
-                            
-                                <figcaption style="float: right;text-align: middle;padding-top: 116px;padding-left: 43px;">
-                            {{ gam.game.title }}  Rated: {{ gam.score }} </figcaption> 
-                      </a>
-                  </div>
-              </li>
-          </ul>
-          {% endif %}
-  {% endfor %}
-</div>
-	 
-{% endblock content %}
+            <div class="caption">
+                {{ gam.game.title }}
+                <br>
+                <p style="color: initial; font-size: 0.8em; text-decoration: none;">
+                    Average Rating: {{ gam.score }}
+                </p>
+            </div>
+        </a>
+        </di>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    {% endblock content %}
