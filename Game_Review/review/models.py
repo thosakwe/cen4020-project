@@ -28,12 +28,12 @@ class Review(models.Model):
         return self.reviewvote_set.filter(vote=-1).count()
 
     def get_average(self):
-        divider = (self.get_likes()+self.get_dislikes()) * 100
-        if divider:
-            average = int(self.get_likes()/divider)
+        if not self.get_dislikes():
+            val = 100
         else:
-            average = 1
-        return f"{str(average)}%"
+            val = (self.get_likes() * 100) / self.get_dislikes()
+            val = round(val)
+        return f"{str(val)}%"
 class Rating(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     on_review = models.ForeignKey(Review, on_delete=models.CASCADE)
