@@ -41,7 +41,7 @@ ul {
     font-weight: 500;
 }
 
-.content-section {
+.content-section, .comment_form {
     background: #ffffff;
     padding: 10px 20px;
 
@@ -49,6 +49,29 @@ ul {
     border-radius: 4px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
+}
+
+.comment_form {
+    align-items: center;
+    display: flex;
+}
+
+.comment_form button {
+    font-size: 1em;
+    margin-left: 0.5em;
+    padding: 0 0.5em;
+}
+
+.comment_form input {
+    border: 1px solid #dedede;
+    border-radius: 4px;
+    margin-left: 0.5em;
+    padding: 0 0.5em;
+}
+
+.comment_form label {
+    font-size: 1em;
+    margin-bottom: 0;
 }
 
 .article-title {
