@@ -197,6 +197,7 @@ figure figcaption {
 .games-table {
     border: none;
     display: flex;
+    flex-wrap: wrap;
     padding: 1em 0.5em;
 
     /*
