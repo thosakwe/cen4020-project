@@ -120,6 +120,11 @@ class PlaythroughCreateView(LoginRequiredMixin, CreateView):
     model = playthroughs
     fields = ['title','content', 'videofile']
 
+    def get_context_data(self, **kwargs):
+        ctx = super(PlaythroughCreateView, self).get_context_data(**kwargs)
+        ctx['game'] = Game.objects.get(pk=self.kwargs['game'])
+        return ctx
+
     def form_valid(self, form):
         game = Game.objects.get(pk=self.kwargs['game'])
         form.instance.author = self.request.user

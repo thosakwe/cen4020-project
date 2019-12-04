@@ -28,7 +28,7 @@
       </div>
     </article>
     <div class="comment-section">
-      <li class="media">
+      <div class="content-section media">
         {% if user.is_authenticated %}
           <a class="pull-left" href="{% url 'profile' user.id %}">
             <img class="message-avatar"  src="{{ user.profile.avatar }}" alt="{{ the_user.username }}">
@@ -42,11 +42,11 @@
           <a class="btn btn-primary  btn-lg" href="{% url 'login' %}">Log in to leave a comment</a>
           <a class="btn btn-primary  btn-lg" href="{% url 'register' %}">Register if you don't have an account</a>
         {% endif %}
-      </li>
+      </div>
       {% for comment in comments %}
-      <li class="media">
+      <div class="content-section media">
         <a class="pull-left" href="{% url 'profile' comment.author.id %}">
-          <img class="message-avatar"  src="{{ comment.author.profile.avatar }}" alt="{{ the_user.username }}">
+          <img class="message-avatar in-extended"  src="{{ comment.author.profile.avatar }}" alt="{{ the_user.username }}">
         </a>
         <div class="media-body">
           <div class="well well-lg">
@@ -62,7 +62,7 @@
               </form>
           </div>              
         </div>
-      </li>
+      </div>
       {% endfor %}
     </div>
 {% endblock content %}

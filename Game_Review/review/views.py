@@ -138,6 +138,11 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
     model = Review
     fields = ['title','content']
 
+    def get_context_data(self, **kwargs):
+        ctx = super(ReviewCreateView, self).get_context_data(**kwargs)
+        ctx['game'] = Game.objects.get(pk=self.kwargs['game'])
+        return ctx
+
     def form_valid(self, form):
         print(self.kwargs)
         game = Game.objects.get(pk=self.kwargs['game'])
