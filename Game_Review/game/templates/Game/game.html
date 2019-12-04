@@ -39,7 +39,7 @@
       {% if reviews %}
       <hr>
       <h5>Reviews ({{ reviews | length }})</h5>
-      <ul class="media-list">
+      <ul class="media-list" style="padding: 0">
         {% for review in reviews %}
         <li class="media">
           <a class="pull-left" href="{% url 'profile' review.author.id %}">
