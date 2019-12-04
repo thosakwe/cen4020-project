@@ -15,11 +15,11 @@
             <div class="form-group">
               <label for="starsInput">Stars (<span id="starCount">3</span> out of 5):</label>
               <div id="stars">
-                <div class="fas fa-star"></div>
-                <div class="fas fa-star"></div>
-                <div class="fas fa-star"></div>
-                <div class="far fa-star"></div>
-                <div class="far fa-star"></div>
+                <div class="fa fa-star"></div>
+                <div class="fa fa-star"></div>
+                <div class="fa fa-star"></div>
+                <div class="fa fa-star-o"></div>
+                <div class="fa fa-star-o"></div>
               </div>
               <input id="starsInput" name="stars" class="form-control" step="1" min="1" max="5" value="3" type="range">
             </div>
@@ -27,8 +27,18 @@
     </div>
     <script>
     $(function() {
+        var $stars = $('#stars div');
         $('#starsInput').on('input', function() {
+            var val = parseInt($(this).val());
             $('#starCount').text($(this).val());
+            for (var i = 0; i < val; i++) {
+                $stars[i].classList.remove('fa-star-o');
+                $stars[i].classList.add('fa-star');
+            }
+            for (var i = val; i < 5; i++) {
+                $stars[i].classList.remove('fa-star');
+                $stars[i].classList.add('fa-star-o');
+            }
         });
     });
     </script>

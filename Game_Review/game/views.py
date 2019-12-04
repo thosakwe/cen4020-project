@@ -27,9 +27,9 @@ def get_by_id(request, id):
         avg_review = int(avg_review)
         review_classes = []
         for i in range(0, avg_review):
-            review_classes.append("fas fa-star")
+            review_classes.append("fa fa-star")
         for i in range(avg_review, 5):
-            review_classes.append("far fa-star")
+            review_classes.append("fa fa-star-o")
     game.image_path = re.sub(r'^review', '', game.image_path.url)
     context = {
         'game': game, 
