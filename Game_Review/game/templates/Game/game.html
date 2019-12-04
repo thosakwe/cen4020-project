@@ -9,7 +9,9 @@
   <div class="main-content">
     <div class="">
       <h1>{{ game.title }}</h1>
-      <img style="max-height: 20em;" src="{{ game.image_path }}" alt="{{ game.title }}">
+      <a href="{{ game.image_path }}" target="_blank">
+        <img src="{{ game.image_path }}" alt="{{ game.title }}">
+      </a>
       <p>
         {% if not playthroughss.exists %}
         <i>This game has no playthroughs.</i>
@@ -82,8 +84,7 @@
                 {{ playthroughs.content }}
               </p>
               <p>Average like/dislike ratio: {{ playthroughs.get_average }}</p>
-              <br><br>
-              <video width='400' controls>
+              <video controls>
                 <source src='{{ MEDIA_URL }}{{ playthroughs.videofile }}' type='video/mp4'>
                 Your browser does not support the video tag.
               </video>
