@@ -21,7 +21,7 @@ MEDIA_URL= "/media/"
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '*_xuhtm$d2n88(8t2d8!ws6wr21vt1etsiac9db_ej&61xs*u!'
+SECRET_KEY = '6LfpE8YUAAAAAPaV1s0OfstnictF2482Cn5F8nAv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
