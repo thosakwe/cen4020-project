@@ -5,7 +5,11 @@
   <h1>{{ game.title }}</h1>
   <img style="max-height: 20em;" src="{{ game.image_path }}" alt="{{ game.title }}">
   <p>
-  <br>
+    <br>
+    {% if not playthroughss.exists %}
+      <i>This game has no playthroughs.</i>
+    <br>
+    {% endif %}
     <br>
     {% if not reviews.exists %}
     <i>This game has no reviews yet.</i>
@@ -48,10 +52,7 @@
       </ul>
   <!-- TODO: List all reviews, with user profile pics and stars -->
   {% endif %}
-  {% if not playthroughss.exists %}
-  <i>This game has no playthroughs.</i>
-  <br>
-  {% endif %}
+  
 {% if playthroughss %}
 <hr>
 <h5>playthroughs ({{ playthroughss | length }})</h5>
