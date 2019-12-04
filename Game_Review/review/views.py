@@ -143,7 +143,7 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
         game = Game.objects.get(pk=self.kwargs['game'])
         form.instance.author = self.request.user
         form.instance.game = game
-        form.instance.score = 3
+        form.instance.score = int(form.data.get('score'))
         return super().form_valid(form)
 
 class ReviewUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -152,7 +152,7 @@ class ReviewUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        form.instance.score = 3
+        form.instance.score = int(form.data.get('score'))
         return super().form_valid(form)
 
     def test_func(self):
