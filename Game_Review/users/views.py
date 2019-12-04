@@ -39,7 +39,7 @@ def profile(request,id):
     the_user = User.objects.get(pk=id)
     profile, _ = Profile.objects.get_or_create(user=the_user)
     reviews = Review.objects.filter(author=the_user)
-    playthroughss = playthroughs.objects.filter(author=the_user)
+    playthrough_objects = playthroughs.objects.filter(author=the_user)
 
     if request.method == "POST":
         if the_user.id != request.user.id:
@@ -79,6 +79,6 @@ def profile(request,id):
         'profile': profile,
         'the_user': the_user,
         'reviews':reviews,
-        'playthroughs':playthroughss,
+        'playthroughs':playthrough_objects,
     }
     return render(request, 'users/profile.html', context)
