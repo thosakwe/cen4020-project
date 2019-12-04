@@ -29,6 +29,12 @@ ul {
     margin: 0;
 }
 
+footer {
+  background: #CEB888 !important;
+  color: #444 !important;
+  font-size: 0.9em;
+}
+
 .fa-star {
     color: #ffa63e;
 }
