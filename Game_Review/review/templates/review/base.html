@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -138,8 +139,18 @@
     }
   </script>
   <script>
-    $(function() {
+    $(function () {
       $('label[for="id_content"]').text('Leave a comment:');
+      $('.game-score').each(function () {
+        var score = parseInt($(this).text());
+        $(this).empty();
+        for (var i = 0; i < score; i++) {
+          $(this).append('<i class="fa fa-star"></i>');
+        }
+        for (var i = score; i < 5; i++) {
+          $(this).append('<i class="fa fa-star-o"></i>');
+        }
+      });
     });
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"

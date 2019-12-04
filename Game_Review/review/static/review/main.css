@@ -29,6 +29,10 @@ ul {
     margin: 0;
 }
 
+.fa-star {
+    color: #ffa63e;
+}
+
 .bg-steel {
     background-color: #733635;
 }
