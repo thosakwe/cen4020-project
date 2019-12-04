@@ -87,11 +87,11 @@
                 <p><i class="fa fa-thumbs-up"></i> Like/Dislike ratio: {{ playthroughs.get_average }}</p>
             </div>
           </div>
-          <video controls>
-              <source src='{{ MEDIA_URL }}{{ playthroughs.videofile }}' type='video/mp4'>
-              Your browser does not support the video tag.
-            </video>
         </div>
+        <video controls>
+          <source src='{{ MEDIA_URL }}{{ playthroughs.videofile }}' type='video/mp4'>
+          Your browser does not support the video tag.
+        </video>
         {% endfor %}
       </div>
 
