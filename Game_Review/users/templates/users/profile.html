@@ -5,6 +5,8 @@
     <h1>
         {% if the_user.profile.avatar %}
         <img src="{{ the_user.profile.avatar }}" alt="{{ the_user.username }}" class="avatar">
+        {% else %}
+        <i class="fa fa-user"></i>
         {% endif %}
         {{ the_user.username }}
     </h1>
