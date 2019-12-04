@@ -79,7 +79,7 @@
 
     <p>Links to playthroughs posted by {{ the_user.username }}</p>
     <div class="profile">
-        {% for review in reviews %}
+        {% for playthrough in playthroughs %}
         <a href="{{ playthrough.get_absolute_url }}">{{ playthrough.title }}</a> <br>
         {% endfor %}
     </div>
