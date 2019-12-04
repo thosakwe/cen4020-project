@@ -20,7 +20,7 @@ up in Django
 * [ ] Add RECAPTCHA verification to the pages for commenting
 and creating reviews
 * [ ] Allow editing of comments and reviews
-* [ ] Allow embedding a YouTube video
+* [x] Allow Uploads of videos
 * [ ] Show newest reviews on homepage
 * [ ] Allow searching of reviews (or comments, maybe)
 * [ ] Whatever we decide afterwards..
