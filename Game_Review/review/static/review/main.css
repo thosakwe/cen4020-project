@@ -125,5 +125,29 @@ div#para1 {
 
 .chip {
   background: #afafaf;
-  padding: 1em;
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.6);
+  display: inline-block;
+  padding: 0 0.5em;
+}
+
+.chip .fa {
+  margin-right: 4px;
+}
+
+.has-backdrop {
+  background: rgba(115, 54, 53, 0.05);
+  border-radius: 4px 4px 0 0;
+  margin: -0.6rem -1.3em;
+}
+
+.profile-chips {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.profile-chips .has-chip {
+  flex: 1;
+  font-size: 0.8em;
+  text-align: center;
 }
