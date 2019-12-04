@@ -135,6 +135,27 @@ div#para1 {
   margin-right: 4px;
 }
 
+.games-table {
+  border: none;
+  /*
+  height: 82px; width: 20%; border-collapse: collapse;
+  */
+}
+
+.game-td {
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+}
+
+.game-td img {
+  border-radius: 4px 4px 0 0;
+}
+
+.game-td .caption {
+  padding: 0.25em 1em;
+}
+
 .has-backdrop {
   background: rgba(115, 54, 53, 0.05);
   border-radius: 4px 4px 0 0;
