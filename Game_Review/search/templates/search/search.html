@@ -1,26 +1,30 @@
 {% extends "review/base.html" %}
 {% block content %}
 <div class="content-section">
-<h5><font face="roboto">Search games</font></h5><br>
-<form method="POST" >
+  <h5>
+    <font face="roboto">Search games</font>
+  </h5><br>
+  <form class="comment_form" method="POST">
     {% csrf_token %}
     {{ searched }}
-    <button type="submit">Submit</button>
-</form>
-
+    <button class="btn btn-primary" type="submit">Submit</button>
+  </form>
+</div>
+{% if result|length <= 0 and method == "POST" %}
+<div class="alert alert-warning">
+  Sorry, we didn't find any games matching your search query.
+</div>
+{% endif %}
+<div class="game-table">
   {% for game in result %}
-      <ul>
-          <li>
-              <div class=figure>
-                  <a href="{% url 'game' game.pk %}">
-                      <img alt="game_name" src="{{game.image_path.url}}" width="184" height="255">
-                      <figcaption style="float: right; text-align: middle;"> 
-                                
-                            <figcaption style="float: right;text-align: middle;padding-top: 116px;padding-left: 43px;"> {{ game.title }} </figcaption>
-                  </a>
-              </div>
-          </li>
-      </ul>
+  <div class="game-td">
+    <a href="{% url 'game' game.pk %}">
+      <img alt="game_name" src="{{game.image_path.url}}">
+      <div class="caption">
+        {{ game.title }}
+      </div>
+    </a>
+  </div>
   {% endfor %}
 </div>
 {% endblock content %}
