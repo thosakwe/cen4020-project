@@ -108,7 +108,6 @@ def playthrough_detail(request,pk):
                 user_vote.delete()
             if user_vote.filter(vote=1).exists():
                 user_vote.get(vote=1).delete()
-        return HttpResponseRedirect("")
     context = {
             'object': playthrough,
             'comments': comments,
