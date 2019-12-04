@@ -175,10 +175,15 @@ figure figcaption {
     background: white;
     border-radius: 4px;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    display: inline-block;
     text-align: center;
     transition: box-shadow ease-in 100ms;
     transition: margin-top ease-in 100ms;
     width: fit-content;
+}
+
+.game-td:not(:last-of-type) {
+    margin-right: 0.5em;
 }
 
 .game-td:hover {
