@@ -108,3 +108,17 @@ div#para1 {
 .media-body { position: relative; }
 .profile { padding-left:2em;
   border:2px solid #ccc; width:600px; height: 100px; overflow-y: scroll;}
+  figure {
+    position: relative;
+  }
+  figure figcaption {
+    color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: right;
+    padding: 15px;
+    font-style: oblique;
+    font-size: smaller;
+    mix-blend-mode: soft-light;
+  }

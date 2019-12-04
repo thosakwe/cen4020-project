@@ -1,23 +1,26 @@
 {% extends "review/base.html" %}
 {% block content %}
-<h3><font face="roboto">Search a game to rate</font></h3><br>
+<div class="content-section">
+<h5><font face="roboto">Search games</font></h5><br>
 <form method="POST" >
     {% csrf_token %}
     {{ searched }}
     <button type="submit">Submit</button>
 </form>
+
   {% for game in result %}
       <ul>
           <li>
               <div class=figure>
                   <a href="{% url 'game' game.pk %}">
-                      <img alt="game_name" src="{{ game.image_path.url }}" width="184" height="255">
-                      <figcaption> {{ game.title }} </figcaption>
+                      <img alt="game_name" src="{{game.image_path.url}}" width="184" height="255">
+                      <figcaption style="float: right; text-align: middle;"> 
+                                
+                            <figcaption style="float: right;text-align: middle;padding-top: 116px;padding-left: 43px;"> {{ game.title }} </figcaption>
                   </a>
-
-
               </div>
           </li>
       </ul>
   {% endfor %}
+</div>
 {% endblock content %}
