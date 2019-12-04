@@ -42,12 +42,17 @@
 {% endif %}
 <div class="user-made-content">
     <p>Links to reviews made by {{ the_user.username }}</p>
-    {% for review in reviews %}
-        <a href="{{ review.get_absolute_url }}">{{ review.title }}</a>
-    {% endfor %}
+    <div class="profile">
+        {% for review in reviews %}
+            <a href="{{ review.get_absolute_url }}">   <sp> {{ review.title }}</a> <br>
+        {% endfor %}
+    </div>
+
     <p>Links to playthroughs posted by {{ the_user.username }}</p>
-    {% for playthrough in playthroughs %}
-        <a href="{{ playthrough.get_absolute_url }}">{{ playthrough.title }}</a>
-    {% endfor %}
+    <div class="profile">
+        {% for review in reviews %}
+            <a href="{{ playthrough.get_absolute_url }}">{{ playthrough.title }}</a> <br>
+        {% endfor %}
+    </div>
 </div>
 {% endblock content %}

@@ -11,9 +11,11 @@
           <li>
               <div class=figure>
                   <a href="{% url 'game' game.pk %}">
-                      <img alt="game_name" src="{{game.image_path.url}}" width="184" height="255">
+                      <img alt="game_name" src="{{ game.image_path.url }}" width="184" height="255">
                       <figcaption> {{ game.title }} </figcaption>
                   </a>
+
+
               </div>
           </li>
       </ul>
