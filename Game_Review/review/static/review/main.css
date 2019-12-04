@@ -122,3 +122,8 @@ div#para1 {
     font-size: smaller;
     mix-blend-mode: soft-light;
   }
+
+.chip {
+  background: #afafaf;
+  padding: 1em;
+}

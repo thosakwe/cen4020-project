@@ -10,7 +10,13 @@
         {% endif %}
         {{ the_user.username }}
     </h1>
-    <h2>Total Karma {{ the_user.profile.get_karma }}</h2>
+    <p>
+        <b><i class="fa fa-smile-o"></i> Karma: </b> {{ the_user.profile.get_karma }}
+        <br>
+        <b><i class="fa fa-star"></i> Reviews: </b> {{ reviews | length }}
+        <br>
+        <b><i class="fa fa-gamepad"></i> Playthroughs: </b> {{ playthroughs | length }}
+    </p>
     {% if not the_user.profile.bio %}
     <p>
         <i>{{ the_user.username }} has not yet added a bio.</i>
@@ -46,14 +52,16 @@
     <p>Links to reviews made by {{ the_user.username }}</p>
     <div class="profile">
         {% for review in reviews %}
-            <a href="{{ review.get_absolute_url }}">   <sp> {{ review.title }}</a> <br>
+        <a href="{{ review.get_absolute_url }}">
+            <sp> {{ review.title }}
+        </a> <br>
         {% endfor %}
     </div>
 
     <p>Links to playthroughs posted by {{ the_user.username }}</p>
     <div class="profile">
         {% for review in reviews %}
-            <a href="{{ playthrough.get_absolute_url }}">{{ playthrough.title }}</a> <br>
+        <a href="{{ playthrough.get_absolute_url }}">{{ playthrough.title }}</a> <br>
         {% endfor %}
     </div>
 </div>
