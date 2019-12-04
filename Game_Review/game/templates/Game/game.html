@@ -39,9 +39,9 @@
       {% if reviews %}
       <hr>
       <h5>Reviews ({{ reviews | length }})</h5>
-      <ul class="media-list" style="padding: 0">
+      <div class="media-list" style="padding: 0">
         {% for review in reviews %}
-        <li class="media">
+        <div class="media">
           <a class="pull-left" href="{% url 'profile' review.author.id %}">
             <img class="message-avatar" src="{{ review.author.profile.avatar }}" alt="{{ the_user.username }}">
             <!-- <img class="media-object rounded-circle"  src="{{ profile.avatar }}" alt="{{ the_user.username }}"> -->
@@ -58,18 +58,18 @@
               <p><i class="fa fa-thumbs-up"></i> Like/Dislike ratio: {{ review.get_average }}</p>
             </div>
           </div>
-        </li>
+        </div>
         {% endfor %}
-      </ul>
+      </div>
       <!-- TODO: List all reviews, with user profile pics and stars -->
       {% endif %}
 
       {% if playthroughss %}
       <hr>
       <h5>Playthroughs ({{ playthroughss | length }})</h5>
-      <ul class="media-list" style="padding: 0">
+      <div class="media-list" style="padding: 0">
         {% for playthroughs in playthroughss %}
-        <li class="media">
+        <div class="media">
           <a class="pull-left" href="{% url 'profile' playthroughs.author.id %}">
             <img class="message-avatar" src="{{ playthroughs.author.profile.avatar }}" alt="{{ the_user.username }}">
             <!-- <img class="media-object rounded-circle"  src="{{ profile.avatar }}" alt="{{ the_user.username }}"> -->
@@ -85,16 +85,15 @@
                   {{ playthroughs.content }}
                 </p>
                 <p><i class="fa fa-thumbs-up"></i> Like/Dislike ratio: {{ playthroughs.get_average }}</p>
-                <video controls>
-                  <source src='{{ MEDIA_URL }}{{ playthroughs.videofile }}' type='video/mp4'>
-                  Your browser does not support the video tag.
-                </video>
-                <br><br>
             </div>
           </div>
-        </li>
+          <video controls>
+              <source src='{{ MEDIA_URL }}{{ playthroughs.videofile }}' type='video/mp4'>
+              Your browser does not support the video tag.
+            </video>
+        </div>
         {% endfor %}
-      </ul>
+      </div>
 
       {% endif %}
       <hr>
