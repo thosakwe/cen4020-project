@@ -221,6 +221,7 @@ figure figcaption {
 .game-page h1 {
   color: white;
   position: absolute;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
   top: 0.5em;
   left: 0.5em;
   z-index: 999;
@@ -232,7 +233,9 @@ figure figcaption {
 
 .game-page div.backdrop {
   background: black;
-  opacity: 0.75;
+  /* background: linear-gradient(black, white 35%); */
+  background: linear-gradient(white, black 35%);
+  opacity: 0.5;
 }
 
 .game-page .main-content {
