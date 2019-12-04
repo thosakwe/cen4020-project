@@ -12,14 +12,28 @@
             <div class="caption">
                 {{ gam.game.title }}
                 <br>
-                <p style="color: initial; font-size: 0.8em; text-decoration: none;">
-                    Average Rating: {{ gam.score }}
+                <p style="color: #444; font-size: 0.8em; text-decoration: none;">
+                    Average Rating: <span class="game-score">{{ gam.score }}</span>
                 </p>
             </div>
         </a>
-        </di>
-        {% endif %}
-        {% endfor %}
     </div>
+    {% endif %}
+    {% endfor %}
+    <script>
+        $(function() {
+            $('.game-score').each(function() {
+                var score = parseInt($(this).text());
+                $(this).empty();
+                for (var i = 0; i < score; i++) {
+                    $(this).append('<i class="fa fa-star"></i>');
+                }
+                for (var i = score; i < 5; i++) {
+                    $(this).append('<i class="fa fa-star-o"></i>');
+                }
+            });
+        });
+    </script>
+</div>
 
-    {% endblock content %}
+{% endblock content %}
