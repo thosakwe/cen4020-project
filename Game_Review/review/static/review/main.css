@@ -1,117 +1,130 @@
 body {
-  background: #fafafa;
-  color: #333333;
-  margin-top: 5rem;
+    background: #fafafa;
+    color: #333333;
+    margin-top: 5rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #444444;
+    color: #444444;
 }
 
 ul {
-  margin: 0;
+    margin: 0;
 }
 
 .bg-steel {
-  background-color: #733635;
+    background-color: #733635;
 }
 
 .site-header .navbar-nav .nav-link {
-  color: #cbd5db;
+    color: #cbd5db;
 }
 
 .site-header .navbar-nav .nav-link:hover {
-  color: #ffffff;
+    color: #ffffff;
 }
 
 .site-header .navbar-nav .nav-link.active {
-  font-weight: 500;
+    font-weight: 500;
 }
 
 .content-section {
-  background: #ffffff;
-  padding: 10px 20px;
-  border: 1px solid #dddddd;
-  border-radius: 3px;
-  margin-bottom: 20px;
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
 }
 
 .article-title {
-  color: #444444;
+    color: #444444;
 }
 
 a.article-title:hover {
-  color: #428bca;
-  text-decoration: none;
+    color: #428bca;
+    text-decoration: none;
 }
 
 .article-content {
-  white-space: pre-line;
+    white-space: pre-line;
 }
 
 .article-img {
-  height: 65px;
-  width: 65px;
-  margin-right: 16px;
+    height: 65px;
+    width: 65px;
+    margin-right: 16px;
 }
 
 .article-metadata {
-  padding-bottom: 1px;
-  margin-bottom: 4px;
-  border-bottom: 1px solid #e3e3e3
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #e3e3e3;
 }
 
 .article-metadata a:hover {
-  color: #333;
-  text-decoration: none;
+    color: #333;
+    text-decoration: none;
 }
 
 .article-svg {
-  width: 25px;
-  height: 25px;
-  vertical-align: middle;
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
 }
 
 .account-img {
-  height: 125px;
-  width: 125px;
-  margin-right: 20px;
-  margin-bottom: 16px;
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
 }
 
 .account-heading {
-  font-size: 2.5rem;
+    font-size: 2.5rem;
 }
 
 img.avatar {
-  border-radius: 50%;
-  height: 1.5em;
-  width: 1.5em;
-  object-fit: cover;
-}
-.ex1 {
-  position: absolute;
-  float: right;
-  margin-left: 400px;
-} 
-div#para1 {
-  font-size: 0.7rem;
-  font-style: italic;
+    border-radius: 50%;
+    height: 1.5em;
+    width: 1.5em;
+    object-fit: cover;
 }
 
-.message-avatar { 
-  height: 5em;
-  width: 5em;
-  object-fit: cover;
-  border-radius: 50%; 
+.ex1 {
+    position: absolute;
+    float: right;
+    margin-left: 400px;
 }
-.media-body { position: relative; }
-.profile { padding-left:2em;
-  border:2px solid #ccc; width:600px; height: 100px; overflow-y: scroll;}
-  figure {
+
+div#para1 {
+    font-size: 0.7rem;
+    font-style: italic;
+}
+
+.message-avatar {
+    height: 5em;
+    width: 5em;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.media-body {
     position: relative;
-  }
-  figure figcaption {
+}
+
+.profile {
+    padding-left: 2em;
+    border: 2px solid #ccc;
+    width: 600px;
+    height: 100px;
+    overflow-y: scroll;
+}
+
+figure {
+    position: relative;
+}
+
+figure figcaption {
     color: white;
     position: absolute;
     bottom: 0;
@@ -121,54 +134,71 @@ div#para1 {
     font-style: oblique;
     font-size: smaller;
     mix-blend-mode: soft-light;
-  }
+}
 
 .chip {
-  background: #afafaf;
-  border-radius: 4px;
-  color: rgba(0, 0, 0, 0.6);
-  display: inline-block;
-  padding: 0 0.5em;
+    background: #afafaf;
+    border-radius: 4px;
+    color: rgba(0, 0, 0, 0.6);
+    display: inline-block;
+    padding: 0 0.5em;
 }
 
 .chip .fa {
-  margin-right: 4px;
+    margin-right: 4px;
 }
 
 .games-table {
-  border: none;
-  /*
-  height: 82px; width: 20%; border-collapse: collapse;
-  */
+    border: none;
+    padding: 1em 0.5em;
+    /*
+    height: 82px; width: 20%; border-collapse: collapse;
+    */
 }
 
 .game-td {
-  background: white;
-  border-radius: 4px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: box-shadow ease-in 100ms;
+    transition: margin-top ease-in 100ms;
+    width: fit-content;
+}
+
+.game-td:hover {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  margin-top: -0.5em;
 }
 
 .game-td img {
-  border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+    height: 15em;
+    width: auto;
 }
 
 .game-td .caption {
-  padding: 0.25em 1em;
+    padding: 0.25em 1em;
+}
+
+.game-td a {
+    cursor: pointer;
+    text-decoration: none !important;
 }
 
 .has-backdrop {
-  background: rgba(115, 54, 53, 0.05);
-  border-radius: 4px 4px 0 0;
-  margin: -0.6rem -1.3em;
+    background: rgba(115, 54, 53, 0.05);
+    border-radius: 4px 4px 0 0;
+    margin: -0.6rem -1.3em;
 }
 
 .profile-chips {
-  display: flex;
-  flex-wrap: nowrap;
+    display: flex;
+    flex-wrap: nowrap;
 }
 
 .profile-chips .has-chip {
-  flex: 1;
-  font-size: 0.8em;
-  text-align: center;
+    flex: 1;
+    font-size: 0.8em;
+    text-align: center;
 }

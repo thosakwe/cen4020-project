@@ -1,32 +1,29 @@
 {% extends "review/base.html" %}
 {% block content %}
-<table class="games-table">
-  <tbody>
-    <tr style="height: 260px;">
-      {% for game in games %}
-      {% if forloop.counter0 != 0 and forloop.counter0|divisibleby:4 %}
-    </tr>
-    {% endif %}
-    <td class="game-td" style="width: 30%; height: 200px;">
-      <div class="figure">
-        <a href="{% url 'game' game.pk %}">
-          <img alt="game_name" src="{{ game.image_path }}" width="184" height="255">
-          <div class="caption"> Rate {{ game.title }} </div>
-        </a>
+<div class="games-table">
+  <!-- <tr style="height: 260px;"> -->
+  {% for game in games %}
+  {% if forloop.counter0 != 0 and forloop.counter0|divisibleby:4 %}
+  <!-- </tr> -->
+  {% endif %}
+  <div class="game-td">
+    <a href="{% url 'game' game.pk %}">
+      <img alt="{{ game.title }}" src="{{ game.image_path }}" width="184" height="255">
+      <div class="caption"> {{ game.title }} </div>
+    </a>
+  </div>
+  {% endfor %}
+  {% for review in reviews %}
+  <article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="#">{{ review.author }}</a>
+        <small class="text-muted">{{ review.date_reviewed|date:"F d, Y" }}</small>
       </div>
-    </td>
-    {% endfor %}
-    {% for review in reviews %}
-    <article class="media content-section">
-      <div class="media-body">
-        <div class="article-metadata">
-          <a class="mr-2" href="#">{{ review.author }}</a>
-          <small class="text-muted">{{ review.date_reviewed|date:"F d, Y" }}</small>
-        </div>
-        <h2><a class="article-title" href="#">{{ review.title }}</a></h2>
-        <p class="article-content">{{ review.content }}</p>
-      </div>
-    </article>
-    {% endfor %}
-</table>
+      <h2><a class="article-title" href="#">{{ review.title }}</a></h2>
+      <p class="article-content">{{ review.content }}</p>
+    </div>
+  </article>
+  {% endfor %}
+</div>
 {% endblock content %}
