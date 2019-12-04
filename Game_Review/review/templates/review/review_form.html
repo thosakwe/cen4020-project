@@ -25,5 +25,12 @@
             </div>
         </form>
     </div>
+    <script>
+    $(function() {
+        $('#starsInput').on('input', function() {
+            $('#starCount').text($(this).val());
+        });
+    });
+    </script>
 
 {% endblock content %}
