@@ -55,7 +55,7 @@
               <p class="media-comment">
                 {{ review.content }}
               </p>
-              <p>Average like/dislike ratio: {{ review.get_average }}</p>
+              <p><i class="fa fa-thumbs-up"></i> Like/Dislike ratio: {{ review.get_average }}</p>
             </div>
           </div>
         </li>
@@ -76,19 +76,20 @@
           </a>
           <div class="media-body">
             <div class="well well-lg">
-              <h2><a class="media-heading text-uppercase reviews"
+              <h3>
+                <a class="media-heading reviews"
                   href="{% url 'playthrough-detail' playthroughs.id %}">{{ playthroughs.title }}</a></h2>
-              <a class="mr-2" href="{% url 'profile' playthroughs.author.id %}">{{ playthroughs.author }}</a>
-              <small class="text-muted">{{ playthroughs.date_posted|date:"F d, Y" }}</small>
-              <p class="media-comment">
-                {{ playthroughs.content }}
-              </p>
-              <p>Average like/dislike ratio: {{ playthroughs.get_average }}</p>
-              <video controls>
-                <source src='{{ MEDIA_URL }}{{ playthroughs.videofile }}' type='video/mp4'>
-                Your browser does not support the video tag.
-              </video>
-              <br><br>
+                <a class="mr-2" href="{% url 'profile' playthroughs.author.id %}">{{ playthroughs.author }}</a>
+                <small class="text-muted">{{ playthroughs.date_posted|date:"F d, Y" }}</small>
+                <p class="media-comment">
+                  {{ playthroughs.content }}
+                </p>
+                <p><i class="fa fa-thumbs-up"></i> Like/Dislike ratio: {{ playthroughs.get_average }}</p>
+                <video controls>
+                  <source src='{{ MEDIA_URL }}{{ playthroughs.videofile }}' type='video/mp4'>
+                  Your browser does not support the video tag.
+                </video>
+                <br><br>
             </div>
           </div>
         </li>
