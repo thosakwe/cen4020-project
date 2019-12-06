@@ -343,3 +343,7 @@ figure figcaption {
     font-size: 0.8em;
     text-align: center;
 }
+
+.page-info {
+    margin-left: 1rem;
+  }

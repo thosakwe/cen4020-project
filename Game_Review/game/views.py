@@ -8,6 +8,7 @@ from statistics import mean
 from .forms import NewGameForm
 from .models import Game, game_public_url
 from playthroughs.models import playthroughs
+from guidebook.models import Guidebook
 from users.models import Profile
 import os
 import re
@@ -18,6 +19,7 @@ import re
 def get_by_id(request, id):
     game = Game.objects.get(pk=id)
     reviews = Review.objects.filter(game=game)
+    guidebooks = Guidebook.objects.filter(game=game)
     playthroughss = playthroughs.objects.filter(game=game)
 
     if not reviews.exists():
@@ -37,6 +39,7 @@ def get_by_id(request, id):
         'review_classes': review_classes, 
         'reviews': reviews,
         'playthroughss': playthroughss,
+        'guidebooks':guidebooks,
     }
     return render(request, 'Game/game.html', context)
 

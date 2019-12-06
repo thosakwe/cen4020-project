@@ -17,6 +17,10 @@
         <i>This game has no playthroughs.</i>
         <br>
         {% endif %}
+        {% if not guidebooks.exists %}
+        <i>This game has no guidebooks.</i>
+        <br>
+        {% endif %}
         <br>
         {% if not reviews.exists %}
         <i>This game has no reviews yet.</i>
@@ -96,9 +100,37 @@
       </div>
 
       {% endif %}
+      {% if guidebooks %}
+      <hr>
+      <h5>Guidebooks ({{ guidebooks | length }})</h5>
+      <div class="media-list" style="padding: 0">
+        {% for guidebook in guidebooks %}
+        <div class="media">
+          <a class="pull-left" href="{% url 'profile' guidebook.author.id %}">
+            <img class="message-avatar" src="{{ guidebook.author.profile.avatar }}" alt="{{ the_user.username }}">
+            <!-- <img class="media-object rounded-circle"  src="{{ profile.avatar }}" alt="{{ the_user.username }}"> -->
+          </a>
+          <div class="media-body">
+            <div class="well well-lg">
+              <h2><a class="media-heading text-uppercase guidebooks"
+                  href="{% url 'guidebook-detail' guidebook.id %}">{{ guidebook.title }}</a></h2>
+              <a class="mr-2" href="{% url 'profile' guidebook.author.id %}">{{ guidebook.author }}</a>
+              <small class="text-muted">{{ guidebook.date_reviewed|date:"F d, Y" }}</small>
+              <p class="media-comment">
+                {{ guidebook.content }}
+              </p>
+              <p><i class="fa fa-thumbs-up"></i> Like/Dislike ratio: {{ guidebook.get_average }}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <!-- TODO: List all reviews, with user profile pics and stars -->
+      {% endif %}
       <hr>
       <a class="btn btn-primary" href="{% url 'review-create' game=game.id %}">Leave a Review</a>
       <a class="btn btn-primary" href="{% url 'playthrough-create' game=game.id %}">Post a Playthrough</a>
+      <a class="btn btn-primary" href="{% url 'guidebook-create' game=game.id %}">Post a Guidebook</a>
     </div>
   </div>
 </div>

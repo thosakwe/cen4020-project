@@ -6,6 +6,7 @@ from django.dispatch import receiver
 from django.contrib.auth import get_user_model
 from review.models import Review, Comment
 from playthroughs.models import playthroughs, PlaythroughComment
+from guidebook.models import Guidebook, GuidebookComment
 
 # Create your models here.
 class Profile(models.Model):
@@ -36,6 +37,18 @@ class Profile(models.Model):
             for comment in comments:
                 comment_likes += comment.get_likes()
                 comment_dislikes += comment.get_dislikes()
+
+        guidebooks = Guidebook.objects.filter(author=self.id)
+        for guidebook in guidebooks:
+            positive_content += (guidebook.get_likes()*5)
+            negative_content += (guidebook.get_dislikes()*3)
+            comments = GuidebookComment.objects.filter(guidebook=guidebook.id)
+            for comment in comments:
+                comment_likes += comment.get_likes()
+                comment_dislikes += comment.get_dislikes()
+        content_karma = positive_content - negative_content
+        comment_karma = comment_likes - comment_dislikes
+        return content_karma + comment_karma
 
         content_karma = positive_content - negative_content
         comment_karma = comment_likes - comment_dislikes

@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'game.apps.GameConfig',
     'review.apps.ReviewConfig',
     'users.apps.UsersConfig',
+    'guidebook.apps.GuidebookConfig',
     'crispy_forms', # This is a third party django app for forms
     'django.contrib.admin',
     'django.contrib.auth',

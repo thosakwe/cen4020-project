@@ -87,5 +87,13 @@
         {% endfor %}
     </div>
     {% endif %}
+    {%if guidebooks|length > 0 %}
+    <p>Links to guidebooks posted by {{ the_user.username }}</p>
+    <div class="content-section is-list">
+        {% for guidebook in guidebooks %}
+        <a href="{{ guidebook.get_absolute_url }}">{{ guidebook.title }}</a> <br>
+        {% endfor %}
+    </div>
+    {% endif %}
 </div>
 {% endblock content %}

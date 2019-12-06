@@ -30,4 +30,5 @@ urlpatterns = [
     path('', include('review.urls')),
     path('', include('playthroughs.urls')),
     path('', include('search.urls')),
+    path('', include('guidebook.urls')),
 ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

@@ -9,6 +9,7 @@ from .models import Profile
 import os
 from review.models import Review
 from playthroughs.models import playthroughs
+from guidebook.models import Guidebook
 # Create your views here.
 
 
@@ -39,6 +40,7 @@ def profile(request,id):
     the_user = User.objects.get(pk=id)
     profile, _ = Profile.objects.get_or_create(user=the_user)
     reviews = Review.objects.filter(author=the_user)
+    guidebooks = Guidebook.objects.filter(author=the_user)
     playthrough_objects = playthroughs.objects.filter(author=the_user)
 
     if request.method == "POST":
@@ -79,6 +81,7 @@ def profile(request,id):
         'profile': profile,
         'the_user': the_user,
         'reviews':reviews,
+        'guidebooks':guidebooks,
         'playthroughs':playthrough_objects,
     }
     return render(request, 'users/profile.html', context)

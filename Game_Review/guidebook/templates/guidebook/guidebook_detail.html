@@ -1,0 +1,197 @@
+{% extends "review/base.html" %}
+{% block content %}
+<div class="media content-section">
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="{% url 'profile' object.author.id %}">{{ object.author }}</a>
+      <small class="text-muted">{{ object.date_reviewed|date:"F d, Y" }}</small>
+      {% if object.author == user %}
+      <div>
+        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'guidebook-update' object.id %}">Update</a>
+        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'guidebook-delete' object.id %}">Delete</a>
+      </div>
+      {% endif %}
+    </div>
+    <h2><a class="article-title">{{ object.title }}</a></h2>
+    <div class="top-bar">
+      <button class="btn" id="prev-page">Prev</button>
+      <button class="btn" id="next-page">Next</button>
+      <span class="page-info">
+        Page <span id="page-num"></span> of <span id="page-count"></span>
+      </span>
+      <span>Index into: <input id="page-index"></input> </span>
+    </div>
+    <canvas id="pdf-render"></canvas>
+    <br><br>
+  </div>
+  {% if user.is_authenticated %}
+  <form class="like_form" method="post" style="margin-top: 1.3em;">
+    {% csrf_token %}
+    <button name="like_btn" class="btn btn-info btn-circle text-uppercase" id="like">
+      <i class="fa fa-thumbs-up"></i>
+      {{ object.get_likes }}</button>
+    <button name="dislike_btn" class="btn btn-warning btn-circle text-uppercase" id="dislike">
+      <i class="fa fa-thumbs-down"></i>
+      {{ object.get_dislikes }}</button>
+  </form>
+  {% else %}
+  <button name="like_btn" class="btn btn-info btn-circle text-uppercase" id="like"> Like {{ object.get_likes }}</button>
+  <button name="dislike_btn" class="btn btn-warning btn-circle text-uppercase" id="dislike"> Dislike
+    {{ object.get_dislikes }}</button>
+  {% endif %}
+</div>
+</article>
+<div class="media content-section">
+    <p class="article-content">{{ object.content }}</p>
+</div>
+<div class="comment-section">
+  <div class="content-section media">
+    {% if user.is_authenticated %}
+    <a class="pull-left" href="{% url 'profile' user.id %}">
+      <img class="message-avatar" src="{{ user.profile.avatar }}" alt="{{ the_user.username }}">
+    </a>
+    <form class="comment_form" method="post" style="margin-top: 1.3em;">
+      {{ comment_form }}
+      {% csrf_token %}
+      <button type="submit" name="comment_form" class="btn btn-primary btn-lg">Send</button>
+    </form>
+    {% else %}
+    <a class="btn btn-primary  btn-lg" href="{% url 'login' %}">Log in to leave a comment</a>
+    <a class="btn btn-primary  btn-lg" href="{% url 'register' %}">Register if you don't have an account</a>
+    {% endif %}
+  </div>
+  {% for comment in comments %}
+  <div class="content-section media">
+    <a class="pull-left" href="{% url 'profile' comment.author.id %}">
+      <img class="message-avatar in-extended" src="{{ comment.author.profile.avatar }}" alt="{{ the_user.username }}">
+    </a>
+    <div class="media-body">
+      <div class="well well-lg">
+        <h2><a class="media-heading text-uppercase reviews" href="#">{{ comment.author }}</a></h2>
+        <small class="text-muted">{{ comment.date_reviewed|date:"F d, Y" }}</small>
+        <p class="media-comment">
+          {{ comment.content }}
+        </p>
+        <form class="like_form" method="post" style="margin-top: 1.3em;">
+          {% csrf_token %}
+          <button name="clike_btn" class="btn btn-info btn-circle text-uppercase" value="{{ comment.id }}" id="like">
+            Like {{ comment.get_likes }}</button>
+          <button name="cdislike_btn" class="btn btn-warning btn-circle text-uppercase" value="{{ comment.id }}"
+            id="dislike"> Dislike {{ comment.get_dislikes }}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+</div>
+<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+<script>
+  const url = '{{ MEDIA_URL }}{{ object.pdf_file }}';
+
+  let pdfDoc = null,
+    pageNum = 1,
+    pageIsRendering = false,
+    pageNumIsPending = null;
+
+  const scale = 1.5,
+    canvas = document.querySelector('#pdf-render'),
+    context = canvas.getContext('2d');
+
+  // Render the page
+  const renderPage = num => {
+    pageIsRendering = true;
+
+    // Get page
+    pdfDoc.getPage(num).then(page => {
+      // Set scale
+      const viewport = page.getViewport({ scale });
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+
+      const renderCtx = {
+        canvasContext: context,
+        viewport
+      };
+
+      page.render(renderCtx).promise.then(() => {
+        pageIsRendering = false;
+
+        if (pageNumIsPending !== null) {
+          renderPage(pageNumIsPending);
+          pageNumIsPending = null;
+        }
+      });
+
+      // Output current page
+      document.querySelector('#page-num').textContent = num;
+    });
+  };
+
+  // Check for pages rendering
+  const queueRenderPage = num => {
+    if (pageIsRendering) {
+      pageNumIsPending = num;
+    } else {
+      renderPage(num);
+    }
+  };
+
+  // Index into Page
+  const indexIntoPage = () => {
+    console.log('index');
+    pageNum = parseInt(document.querySelector('#page-index').value,10);
+    if (pageNum <= 1) {
+      return;
+    }
+    if (pageNum > pdfDoc.numPages) {
+      return;
+    }
+    console.log(pageNum);
+    document.querySelector('#page-index').value = "";
+
+    queueRenderPage(pageNum);
+  };
+
+  // Show Prev Page
+  const showPrevPage = () => {
+    if (pageNum <= 1) {
+      return;
+    }
+    pageNum--;
+    queueRenderPage(pageNum);
+  };
+
+  // Show Next Page
+  const showNextPage = () => {
+    if (pageNum >= pdfDoc.numPages) {
+      return;
+    }
+    pageNum++;
+    queueRenderPage(pageNum);
+  };
+
+  // Get Document
+  pdfjsLib
+    .getDocument(url)
+    .promise.then(pdfDoc_ => {
+      pdfDoc = pdfDoc_;
+
+      document.querySelector('#page-count').textContent = pdfDoc.numPages;
+
+      renderPage(pageNum);
+    });
+
+  // Button Events
+  document.querySelector('#prev-page').addEventListener('click', showPrevPage);
+  document.querySelector('#next-page').addEventListener('click', showNextPage);
+  document.querySelector('#page-index').addEventListener('keypress', function(e) {
+    if (e.keyCode === 13) {  // enter, return
+      console.log("asgas");
+      
+      indexIntoPage();
+    }
+  });
+
+</script>
+{% endblock content %}
