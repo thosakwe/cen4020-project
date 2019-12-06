@@ -13,13 +13,14 @@ import json
 
 # Create your views here.
 def home(request):
-    lst =[1,2,3,4]
     games = Game.objects.all()
     for game in games:
         path = game.image_path.url
         game.image_path = re.sub(r'^review', '', path)
-    context = {'games': games,'list':lst}
+    context = {'games': games}
     return render(request, 'review/home.html', context)
+
+# return three highly rated games
 def news(request):
     lst = []
     dic = {}
@@ -177,11 +178,3 @@ class ReviewDeleteView(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
             return True
         else:
             return False
-# def home(request):
-#     context = {
-#         'reviews': Review.objects.all()
-#     }
-#     return render(request, 'review/home.html', context)
-
-# def about(request):
-#     return render(request, 'review/about.html', {'title':'About'})

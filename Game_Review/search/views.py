@@ -5,7 +5,7 @@ from .form import SearchForm
 from django.db.models import Q
 from django.contrib.postgres.search import SearchQuery
 
-
+# search returns matched games with searched keyword
 def search(request):
     lst = []
     name = ""

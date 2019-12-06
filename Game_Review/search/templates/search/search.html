@@ -5,16 +5,19 @@
     <font face="roboto">Search games</font>
   </h5><br>
   <form class="comment_form" method="POST">
+    <!-- Display search form -->
     {% csrf_token %}
-    {{ searched }}
+    {{ searched }}   
     <button class="btn btn-primary" type="submit">Submit</button>
   </form>
 </div>
+<!-- check returned query list is empty -->
 {% if result|length <= 0 and method == "POST" %}
 <div class="alert alert-warning">
   Sorry, we didn't find any games matching your search query.
 </div>
 {% endif %}
+<!-- show matched games -->
 <div class="game-table">
   {% for game in result %}
   <div class="game-td">
