@@ -35,6 +35,12 @@ def news(request):
             dic[i.game] = 'entered'
     return render(request, 'review/news.html',{'games':games,'review':lst})
 
+def banned(request):
+    return render(request, 'review/banned.html')
+
+def duplicate(request):
+    return render(request, 'review/duplicate.html')
+
 class ReviewListView(ListView):
     """
     This view has not been implemented yet, but reviews get listed
