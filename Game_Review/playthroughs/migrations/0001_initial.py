@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=100)),
                 ('content', models.TextField()),
                 ('date_posted', models.DateTimeField(default=django.utils.timezone.now)),
-                ('videofile', models.FileField(null=True, upload_to='videos/', verbose_name='')),
+                ('videofile', models.FileField(null=True, upload_to='videos/', verbose_name='.mp4 100mb limit')),
                 ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
                 ('game', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='game.Game')),
             ],

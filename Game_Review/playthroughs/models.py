@@ -14,7 +14,7 @@ class playthroughs(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
-    videofile = models.FileField(upload_to='videos/', null=True, verbose_name="")
+    videofile = models.FileField(upload_to='videos/', null=True, verbose_name=".mp4 100mb limit")
 
     def get_absolute_url(self):
         return reverse('playthrough-detail', kwargs={'pk':self.pk})
