@@ -94,7 +94,7 @@
     pageIsRendering = false,
     pageNumIsPending = null;
 
-  const scale = 1.5,
+  const scale = 2,
     canvas = document.querySelector('#pdf-render'),
     context = canvas.getContext('2d');
 
@@ -176,9 +176,7 @@
     .getDocument(url)
     .promise.then(pdfDoc_ => {
       pdfDoc = pdfDoc_;
-
       document.querySelector('#page-count').textContent = pdfDoc.numPages;
-
       renderPage(pageNum);
     });
 
@@ -186,9 +184,7 @@
   document.querySelector('#prev-page').addEventListener('click', showPrevPage);
   document.querySelector('#next-page').addEventListener('click', showNextPage);
   document.querySelector('#page-index').addEventListener('keypress', function(e) {
-    if (e.keyCode === 13) {  // enter, return
-      console.log("asgas");
-      
+    if (e.keyCode === 13) {  // enter, return      
       indexIntoPage();
     }
   });

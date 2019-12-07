@@ -14,7 +14,7 @@ class Guidebook(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
-    pdf_file = models.FileField(upload_to='videos/', null=True, verbose_name="")
+    pdf_file = models.FileField(upload_to='guidebooks/', null=True, verbose_name="")
 
     def get_absolute_url(self):
         return reverse('guidebook-detail', kwargs={'pk':self.pk})
