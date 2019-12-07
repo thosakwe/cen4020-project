@@ -45,6 +45,7 @@
       <h5>Reviews ({{ reviews | length }})</h5>
       <div class="media-list" style="padding: 0">
         {% for review in reviews %}
+        {% if not review.author.profile.banned_from_posting %}
         <div class="media">
           <a class="pull-left" href="{% url 'profile' review.author.id %}">
             <img class="message-avatar" src="{{ review.author.profile.avatar }}" alt="{{ the_user.username }}">
@@ -63,6 +64,7 @@
             </div>
           </div>
         </div>
+        {% endif %}
         {% endfor %}
       </div>
       <!-- TODO: List all reviews, with user profile pics and stars -->
@@ -73,6 +75,7 @@
       <h5>Playthroughs ({{ playthroughss | length }})</h5>
       <div class="media-list" style="padding: 0">
         {% for playthroughs in playthroughss %}
+        {% if not playthroughs.author.profile.banned_from_posting %}
         <div class="media">
           <a class="pull-left" href="{% url 'profile' playthroughs.author.id %}">
             <img class="message-avatar" src="{{ playthroughs.author.profile.avatar }}" alt="{{ the_user.username }}">
@@ -96,6 +99,7 @@
           <source src='{{ MEDIA_URL }}{{ playthroughs.videofile }}' type='video/mp4'>
           Your browser does not support the video tag.
         </video>
+        {% endif %}
         {% endfor %}
       </div>
 
@@ -105,6 +109,7 @@
       <h5>Guidebooks ({{ guidebooks | length }})</h5>
       <div class="media-list" style="padding: 0">
         {% for guidebook in guidebooks %}
+        {% if not guidebook.author.profile.banned_from_posting %}
         <div class="media">
           <a class="pull-left" href="{% url 'profile' guidebook.author.id %}">
             <img class="message-avatar" src="{{ guidebook.author.profile.avatar }}" alt="{{ the_user.username }}">
@@ -123,6 +128,7 @@
             </div>
           </div>
         </div>
+        {% endif %}
         {% endfor %}
       </div>
       <!-- TODO: List all reviews, with user profile pics and stars -->
