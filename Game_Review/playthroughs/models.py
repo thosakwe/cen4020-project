@@ -56,6 +56,7 @@ class PlaythroughComment(models.Model):
     def get_dislikes(self):
         return self.playthroughcommentvote_set.filter(vote=-1).count()
 
+        
 class PlaythroughVote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     playthrough = models.ForeignKey(playthroughs, on_delete=models.CASCADE)
