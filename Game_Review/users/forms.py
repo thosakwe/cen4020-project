@@ -31,6 +31,7 @@ def enforce_rate_limit(request, game, user, model):
   * The user is banned from making posts.
   * The user has already created a review/playthrough/guidebook for this game
   * The user or IP has created more than 10 reviews/playthroughs/guidebooks in the past 15 minutes
+  * The user has -5 or fewer karma.
 
   If `True` is returned, the user will be officially banned from posting, and should be redirected to
   /spam-detected.
@@ -52,6 +53,15 @@ def enforce_rate_limit(request, game, user, model):
   # Load the user's profile, to check if they are banned.
   profile, _ = Profile.objects.get_or_create(user=user)
   if profile.banned_from_posting:
+    return True
+
+  # If they have -5 karma, ban them.
+  # They should only be banned from posting, because theoretically, if someone
+  # upvotes them, they can be redeemed. However, since their content will be
+  # permanently hidden, that is impossible.
+  if profile.karma <= -5:
+    profile.banned_from_posting = True
+    profile.save()
     return True
 
   # Find any review/playthrough for this game by the user.
