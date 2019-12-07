@@ -15,12 +15,20 @@ import json
 
 # Create your views here.
 def home(request):
-    games = Game.objects.all()
+    games = Game.objects.filter(coming_soon=False)
     for game in games:
         path = game.image_path.url
         game.image_path = re.sub(r'^review', '', path)
     context = {'games': games}
     return render(request, 'review/home.html', context)
+
+def coming_soon(request):
+    games = Game.objects.filter(coming_soon=True)
+    for game in games:
+        path = game.image_path.url
+        game.image_path = re.sub(r'^review', '', path)
+    context = {'games': games}
+    return render(request, 'review/coming-soon.html', context)
 
 # return three highly rated games
 def news(request):
@@ -40,6 +48,9 @@ def banned(request):
 
 def duplicate(request):
     return render(request, 'review/duplicate.html')
+
+def too_early(request):
+    return render(request, 'review/too-early.html')
 
 class ReviewListView(ListView):
     """
@@ -149,6 +160,8 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
 
     def post(self, *args, **kwargs):
         game = Game.objects.get(pk=self.kwargs['game'])
+        if game.coming_soon:
+            return HttpResponseRedirect("/too-early")
         rate_limit_result = enforce_rate_limit(self.request, game, self.request.user, Review)
         if rate_limit_result:
             return HttpResponseRedirect("/banned")

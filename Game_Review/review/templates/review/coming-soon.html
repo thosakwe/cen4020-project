@@ -1,0 +1,33 @@
+{% extends "review/base.html" %}
+{% block content %}
+<h1>Coming-Soon Games</h1>
+Games on this page are scheduled to be released soon, so in the meantime, you
+can't leave reviews or playthroughs on them. Stay tuned!
+<br>
+<div class="games-table">
+  <!-- <tr style="height: 260px;"> -->
+  {% for game in games %}
+  {% if forloop.counter0 != 0 and forloop.counter0|divisibleby:4 %}
+  <!-- </tr> -->
+  {% endif %}
+  <div class="game-td">
+    <a href="{% url 'game' game.pk %}">
+      <img alt="{{ game.title }}" src="{{ game.image_path }}" width="184" height="255">
+      <div class="caption"> {{ game.title }} </div>
+    </a>
+  </div>
+  {% endfor %}
+  {% for review in reviews %}
+  <article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="#">{{ review.author }}</a>
+        <small class="text-muted">{{ review.date_reviewed|date:"F d, Y" }}</small>
+      </div>
+      <h2><a class="article-title" href="#">{{ review.title }}</a></h2>
+      <p class="article-content">{{ review.content }}</p>
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% endblock content %}

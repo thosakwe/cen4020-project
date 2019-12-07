@@ -134,9 +134,11 @@
       <!-- TODO: List all reviews, with user profile pics and stars -->
       {% endif %}
       <hr>
+      {% if not game.coming_soon %}
       <a class="btn btn-primary" href="{% url 'review-create' game=game.id %}">Leave a Review</a>
       <a class="btn btn-primary" href="{% url 'playthrough-create' game=game.id %}">Post a Playthrough</a>
       <a class="btn btn-primary" href="{% url 'guidebook-create' game=game.id %}">Post a Guidebook</a>
+      {% endif %}
     </div>
   </div>
 </div>

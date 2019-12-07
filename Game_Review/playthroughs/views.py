@@ -121,6 +121,8 @@ class PlaythroughCreateView(LoginRequiredMixin, CreateView):
 
     def post(self, *args, **kwargs):
         game = Game.objects.get(pk=self.kwargs['game'])
+        if game.coming_soon:
+            return HttpResponseRedirect("/too-early")
         rate_limit_result = enforce_rate_limit(self.request, game, self.request.user, playthroughs)
         if rate_limit_result:
             return HttpResponseRedirect("/banned")
