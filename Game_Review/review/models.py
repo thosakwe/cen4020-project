@@ -14,6 +14,7 @@ class Review(models.Model):
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     score = models.IntegerField()
+    ip = models.TextField()
 
     def __str__(self):
         return self.title

@@ -5,7 +5,9 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponseRedirect
 from users.models import Profile
+from users.forms import enforce_rate_limit
 from .forms import CommentForm
+from .models import Review
 import re
 import collections
 from django.db import models
@@ -138,6 +140,16 @@ class ReviewDetailView(DetailView):
 class ReviewCreateView(LoginRequiredMixin, CreateView):
     model = Review
     fields = ['title','content']
+
+    def post(self, *args, **kwargs):
+        game = Game.objects.get(pk=self.kwargs['game'])
+        rate_limit_result = enforce_rate_limit(self.request, game, self.request.user, Review)
+        if rate_limit_result:
+            return HttpResponseRedirect("/banned")
+        elif rate_limit_result == False:
+            return HttpResponseRedirect("/duplicate")
+        else:
+            return super(ReviewCreateView, self).post(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
         ctx = super(ReviewCreateView, self).get_context_data(**kwargs)

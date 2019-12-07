@@ -9,8 +9,7 @@ from django.shortcuts import render
 #from .models import Video
 from .forms import VideoForm
 from review.forms import CommentForm
-
-
+from users.forms import enforce_rate_limit 
 
 # Create your views here.
 
@@ -119,6 +118,16 @@ def playthrough_detail(request,pk):
 class PlaythroughCreateView(LoginRequiredMixin, CreateView):
     model = playthroughs
     fields = ['title','content', 'videofile']
+
+    def post(self, *args, **kwargs):
+        game = Game.objects.get(pk=self.kwargs['game'])
+        rate_limit_result = enforce_rate_limit(self.request, game, self.request.user, playthroughs)
+        if rate_limit_result:
+            return HttpResponseRedirect("/banned")
+        elif rate_limit_result == False:
+            return HttpResponseRedirect("/duplicate")
+        else:
+            return super(PlaythroughCreateView, self).post(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
         ctx = super(PlaythroughCreateView, self).get_context_data(**kwargs)

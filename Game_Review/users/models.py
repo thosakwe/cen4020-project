@@ -8,12 +8,16 @@ from review.models import Review, Comment
 from playthroughs.models import playthroughs, PlaythroughComment
 from guidebook.models import Guidebook, GuidebookComment
 
+class BannedIp(models.Model):
+    ip = models.TextField()
+
 # Create your models here.
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField()
     avatar = models.TextField()
     karma = models.IntegerField(default=0)
+    banned_from_posting = models.BooleanField(default=False)
 
     def get_karma(self):
         reviews = Review.objects.filter(author=self.id)
